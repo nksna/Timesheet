@@ -1,0 +1,39 @@
+<nav
+  id="navbarNav"
+  class="col-md-3 col-lg-2 d-md-block bg-light sidebar"
+  [ngClass]="{ collapse: isSidenavCollapsed }"
+>
+  <div class="sidebar-sticky">
+    <button
+      class="navbar-toggler d-md-none"
+      type="button"
+      (click)="toggleSidenav()"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <ul class="nav flex-column" *ngIf="isSidenavCollapsed">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/Layout/dashboard">Dashboard</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="">Employee Portal</a>
+      </li>
+      <li class="nav-item" *ngIf="userRole.role === 'admin'">
+        <a class="nav-link" routerLink="/Layout/addnewuser">Addnewuser</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Attendance</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Leave</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Timesheet Management</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Any Queries</a>
+      </li>
+    </ul>
+  </div>
+</nav>

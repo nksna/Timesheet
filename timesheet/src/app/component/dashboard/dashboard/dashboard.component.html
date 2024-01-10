@@ -1,0 +1,43 @@
+<div class="col-md-9">
+    <div class="header bg-light p-3">
+      <div class="left">
+        <div class="date">{{newdate | date:'MMM d, y'}}</div>
+        <div class="welcome">Welcome, {{ userName }}</div>
+      </div>
+      <div class="right">
+        <div *ngIf="startTimeString">
+            {{'Start Time:' + startTimeString}}
+          </div>
+        <button [ngClass]="STime == 'Start Time'? 'btn btn-success':'btn btn-danger'" (click)="starttime(STime)">{{STime}}</button>
+        
+      </div>
+    </div>
+    <div class="content mt-3"> <!-- Add top margin of 30 pixels -->
+      <!-- Additional content goes here -->
+      <table>
+        <thead>
+            <tr>
+                <th>SNo</th>
+                <th>Updated Date</th>
+                <th>Start Time</th>
+                <th>Stop Time</th>
+                <th>Total Hour</th>
+                <th>Status</th>
+                <th>Updated By</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let x of TimesheetArray; let i = index">
+                <td>{{i+1}}</td>
+                <td>{{x.updateDate | date:'MMM d, y'}}</td>
+                <td> {{x.StartTime}}</td>
+                <td> {{x.StopTime}}</td>
+                <td>{{ x.totalhours}}</td>
+                <td [ngClass]="x.status == 'Approved'? 'status-success': 'status-pending'"> <ul><li>{{x.status}}</li></ul></td>
+                <td>krishna</td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+

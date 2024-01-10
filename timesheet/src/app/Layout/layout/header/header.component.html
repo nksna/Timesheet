@@ -1,0 +1,20 @@
+<header class="navbar navbar-dark bg-dark">
+  <div class="container">
+    <button class="navbar-toggler" type="button" (click)="toggleSidenav1()">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <h1 class="navbar-brand">My App</h1>
+    <div style="display: flex; padding: 5px">
+      <div class="navbar-nav" style="padding-left: 10px">
+        <span class="nav-item nav-link"
+          ><i class="bi bi-person-circle"></i>
+        </span>
+      </div>
+      <div class="navbar-nav" style="padding-left: 10px" (click)="logout()">
+        <span class="nav-item nav-link"
+          ><i class="bi bi-box-arrow-right"></i> Logout</span
+        >
+      </div>
+    </div>
+  </div>
+</header>
