@@ -23,7 +23,7 @@ export class SideNavComponent {
     if (this.userid) {
       this.firestore
         .collection('users')
-        .doc(this.userid)
+        .doc(this.userid.uid)
         .valueChanges()
         .subscribe(
           (data) => {
