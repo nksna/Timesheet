@@ -1,0 +1,31 @@
+.container-fluid {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.row {
+  margin-right: 0;
+  margin-left: 0;
+  width: 100%;
+}
+
+.expanded {
+  width: 500px;
+  transition: width 0.3s;
+}
+
+.nav-cls {
+  width: 20%;
+}
+
+.body-cls {
+  width: 80%;
+}
+.collapse {
+  .nav-cls {
+    width: 20%;
+  }
+  .body-cls {
+    width: 80%;
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "debugiz": {
+      "hosting": {
+        "timesheet": [
+          "debugiz"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "debugiz"
+  }
+}

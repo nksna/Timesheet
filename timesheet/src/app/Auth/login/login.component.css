@@ -1,0 +1,29 @@
+.btn-color {
+  background-color: #f80909;
+  color: #fff;
+}
+
+.profile-image-pic {
+  height: 200px;
+  width: 200px;
+  object-fit: cover;
+}
+
+.cardbody-color {
+  background-color: #ebf2fa;
+}
+
+a {
+  text-decoration: none;
+}
+
+.password-icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+.pointer {
+  cursor: pointer;
+}

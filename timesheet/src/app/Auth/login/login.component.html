@@ -1,0 +1,108 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <h2 class="text-center text-dark mt-5">Login</h2>
+
+      <div class="card my-5">
+        <form class="card-body cardbody-color p-lg-5">
+          <div class="text-center">
+            <img
+              src="./assets/food-court.jpg"
+              class="img-fluid profile-image-pic img-thumbnail rounded-circle my-3"
+              width="200px"
+              alt="profile"
+            />
+          </div>
+
+          <div class="mb-3">
+            <div>
+              <label>Email:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="Username"
+                aria-describedby="emailHelp"
+                name="email"
+                placeholder="email"
+                [(ngModel)]="email"
+              />
+            </div>
+          </div>
+          <div class="mb-3">
+            <label>Password:</label>
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              placeholder="password"
+              [(ngModel)]="password"
+              name="password"
+            />
+          </div>
+          <div class="mb-3 text-center">
+            <a
+              style="border-bottom: 1px solid blue; color: blue"
+              (click)="openQtyModel()"
+              >forgot password</a
+            >
+          </div>
+          <div class="text-center">
+            <button
+              type="submit"
+              class="btn btn-color px-5 mb-5 w-100"
+              (click)="Loginform()"
+            >
+              Login To Continue
+            </button>
+          </div>
+
+          <div class="text-center">
+            <label>SingIn with:</label>
+            <button class="btn btn-success" (click)="googlelogin()">
+              Google
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Reset password</h4>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          (click)="closeQtyModel()"
+        ></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <label>Enter email</label>
+        <input
+          type="text"
+          placeholder="Quantity"
+          class="form-control"
+          [(ngModel)]="emailforgat"
+        />
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-danger"
+          data-bs-dismiss="modal"
+          (click)="Send()"
+        >
+          Send
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

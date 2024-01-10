@@ -1,0 +1,21 @@
+nav, .sidebar-sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 48px;
+  min-height: 100vh;
+  background-color: #010a14;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+  color: #ddd; 
+}
+
+.nav-link {
+  padding: 10px;
+}
+
+.collapse {
+  width: 200px;
+}
+.nav-link {
+  color: aliceblue;
+}

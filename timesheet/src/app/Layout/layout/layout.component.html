@@ -1,0 +1,10 @@
+<app-header (toggleSidenav)="toggleSidenav()"></app-header>
+
+<div class="row">
+  <div class="nav-cls">
+    <app-side-nav [isSidenavCollapsed]="isSidenavCollapsed"></app-side-nav>
+  </div>
+  <div class="body-cls">
+    <router-outlet></router-outlet>
+  </div>
+</div>
