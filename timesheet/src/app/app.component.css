@@ -1,2 +1,2 @@
 /* your-component.component.css */
-@import 'ngx-toastr/toastr';
+@import '~ngx-toastr/toastr.css';
