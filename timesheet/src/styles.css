@@ -1,0 +1,8 @@
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/* styles.css or styles.scss */
+
+
+/* styles.css or your global styles file */
+@import '~ngx-toastr/toastr.css';

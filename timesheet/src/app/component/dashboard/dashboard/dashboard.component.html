@@ -5,39 +5,41 @@
         <div class="welcome">Welcome, {{ userName }}</div>
       </div>
       <div class="right">
-        <div *ngIf="startTimeString">
+        <div *ngIf="startTimeString && !stopTimeString">
             {{'Start Time:' + startTimeString}}
           </div>
         <button [ngClass]="STime == 'Start Time'? 'btn btn-success':'btn btn-danger'" (click)="starttime(STime)">{{STime}}</button>
         
       </div>
     </div>
-    <div class="content mt-3"> <!-- Add top margin of 30 pixels -->
+    <div class="content mt-3"> 
       <!-- Additional content goes here -->
       <table>
         <thead>
             <tr>
                 <th>SNo</th>
-                <th>Updated Date</th>
+                <th>Employee id</th>
                 <th>Start Time</th>
                 <th>Stop Time</th>
                 <th>Total Hour</th>
+                <td>Updatedate</td>
                 <th>Status</th>
                 <th>Updated By</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let x of TimesheetArray; let i = index">
+            <tr *ngFor="let x of attendance; let i = index">
                 <td>{{i+1}}</td>
-                <td>{{x.updateDate | date:'MMM d, y'}}</td>
-                <td> {{x.StartTime}}</td>
-                <td> {{x.StopTime}}</td>
-                <td>{{ x.totalhours}}</td>
-                <td [ngClass]="x.status == 'Approved'? 'status-success': 'status-pending'"> <ul><li>{{x.status}}</li></ul></td>
-                <td>krishna</td>
+                <td>{{x.startTime.userid}}</td>
+                <td> {{x.startTime.StartTime}}</td>
+                <td> {{x.startTime.StopTime}}</td>
+                
+                <td>{{ x.startTime.totalhours}}</td>
+                <td>{{ x.startTime.updateDate.toDate() | date: 'yyyy-MM-dd' }}</td>
+                <td [ngClass]="statusCode(x.startTime.status)"> <ul><li>{{x.startTime.status}}</li></ul></td>
+                <td>{{ x.startTime.updateby ? x.startTime.updateby : 'Krishna' }}</td>
+
             </tr>
         </tbody>
       </table>
     </div>
-  </div>
-

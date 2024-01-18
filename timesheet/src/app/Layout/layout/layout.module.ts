@@ -18,7 +18,7 @@ import { RouterModule } from '@angular/router';
     LayoutComponent,
   ],
   imports: [
-    CommonModule,BrowserAnimationsModule,RouterModule,
+    CommonModule,BrowserAnimationsModule,RouterModule
   ],
   exports:[LayoutComponent]
 })

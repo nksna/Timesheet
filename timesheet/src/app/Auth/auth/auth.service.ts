@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { GoogleAuthProvider } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable, of, switchMap } from 'rxjs';
+import { ToasterService } from '../../toaster.service';
 
 @Injectable({
   providedIn: 'root',
@@ -15,6 +16,7 @@ export class AuthService {
     private fire: AngularFireAuth,
     private router: Router,
     private firestore: AngularFirestore,
+   private toastrService:ToasterService
    
   ) {}
   ngOninit(){}
@@ -24,11 +26,13 @@ export class AuthService {
       (res: any) => {
         if (res) {
           localStorage.setItem('token2', JSON.stringify(res.user));
-          this.router.navigateByUrl('/Layout');
+         
+          this.router.navigateByUrl('/Layout/dashboard');
           // this.getUserRole(res.user)
+          this.toastrService.showSuccess('Login successfully', 'Welcome');
         }
        
-        alert('login successfully');
+       
       },
       (err: any) => {
         alert(err.message);

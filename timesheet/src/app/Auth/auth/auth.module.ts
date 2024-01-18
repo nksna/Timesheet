@@ -6,12 +6,19 @@ import { AngularFireModule } from '@angular/fire/compat';
 
 import { Environments } from '../../enviroment';
 import { LoginComponent } from '../login/login.component';
+import { ToastrModule } from 'ngx-toastr';
+
 
 @NgModule({
   declarations: [LoginComponent],
   imports: [
     CommonModule, FormsModule, AngularFireModule.initializeApp(Environments.firebase),
-    FormsModule
+    FormsModule,ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-top-right',
+      preventDuplicates: true
+      
+    })
   ],
   exports: [LoginComponent]
 })

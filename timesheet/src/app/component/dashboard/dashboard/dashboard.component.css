@@ -74,11 +74,14 @@ th {
     }
 }
 
-.status-success {
-    list-style-type: disc;  
-    color: lightgreen;
-}
-
 .status-pending {
     color: yellow;
 }
+.status-success{
+  color:green
+} 
+.status-reject {
+  color: red;
+}
+/* your-component.component.css */
+@import '~ngx-toastr/toastr.css';
