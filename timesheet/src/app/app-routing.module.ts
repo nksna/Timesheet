@@ -39,6 +39,13 @@ const routes: Routes = [
             (m) => m.TimeSheetmanegementModule
           ),
       },
+      {
+        path: 'attendance',
+        loadChildren: () =>
+          import('./component/attendance/attendance/attendance.module').then(
+            (m) => m.AttendanceModule
+          )
+      }
       // { path: 'uikit', loadChildren: () => import('').then(m => m.EmployeedetailModule) },
       // { path: 'utilities', loadChildren: () => import('./demo/components/utilities/utilities.module').then(m => m.UtilitiesModule) },
       // { path: 'documentation', loadChildren: () => import('./demo/components/documentation/documentation.module').then(m => m.DocumentationModule) },

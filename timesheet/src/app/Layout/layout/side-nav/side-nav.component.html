@@ -1,14 +1,6 @@
-<nav
-  id="navbarNav"
-  class="col-md-3 col-lg-2 d-md-block bg-light sidebar"
-  [ngClass]="{ collapse: isSidenavCollapsed }"
->
+<nav id="navbarNav" class="col-md-3 col-lg-2 d-md-block bg-light sidebar" [ngClass]="{ collapse: isSidenavCollapsed }">
   <div class="sidebar-sticky">
-    <button
-      class="navbar-toggler d-md-none"
-      type="button"
-      (click)="toggleSidenav()"
-    >
+    <button class="navbar-toggler d-md-none" type="button" (click)="toggleSidenav()">
       <span class="navbar-toggler-icon"></span>
     </button>
 
@@ -23,7 +15,7 @@
         <a class="nav-link" routerLink="/Layout/addnewuser">Addnewuser</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/hh">Attendance</a>
+        <a class="nav-link" routerLink="/Layout/attendance">Attendance</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/hh">Leave</a>
