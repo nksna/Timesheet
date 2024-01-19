@@ -2,7 +2,7 @@ nav, .sidebar-sticky {
   position: -webkit-sticky;
   position: sticky;
   top: 48px;
-  min-height: 100vh;
+  min-height: 85vh;
   background-color: #010a14;
   padding: 10px;
   border-right: 1px solid #ddd;
