@@ -124,7 +124,7 @@ export class DashboardComponent {
       "status":this.minutes >= 1? 'Approved': 'Pending'
     }
       this.dashboardservice.StartTime(this.userid.uid,user)
-      this.getAttendance()
+     
       
    }
   

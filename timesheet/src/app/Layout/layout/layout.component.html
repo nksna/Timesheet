@@ -1,10 +1,10 @@
 <app-header (toggleSidenav)="toggleSidenav()"></app-header>
 
 <div class="row">
-  <div class="nav-cls">
-    <app-side-nav [isSidenavCollapsed]="isSidenavCollapsed"></app-side-nav>
+  <div class="nav-cls" *ngIf="!isSidenavCollapsed">
+    <app-side-nav [isSidenavCollapsed]="!isSidenavCollapsed"></app-side-nav>
   </div>
-  <div class="body-cls">
+  <div [ngClass]="!isSidenavCollapsed? 'body-cls':'collapsed'">
     <router-outlet></router-outlet>
   </div>
 </div>

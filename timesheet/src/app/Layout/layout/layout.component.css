@@ -4,8 +4,6 @@
 }
 
 .row {
-  margin-right: 0;
-  margin-left: 0;
   width: 100%;
 }
 
@@ -15,19 +13,19 @@
 }
 
 .nav-cls {
-  width: 20%;
+  width: 15%;
 }
 
 .body-cls {
-  width: 80%;
+  height: 580px;
+  width: 85%;
+  padding: 20px 50px 20px 50px;
+  overflow-y: scroll;
 }
 
 .collapsed {
-  .nav-cls {
-    width: 0;
-    overflow: hidden;
-  }
-  .body-cls {
-    width: 100%;
-  }
+  height: 580px;
+  width: 100%;
+  padding: 20px 50px 20px 50px;
+  overflow-y: scroll;
 }
