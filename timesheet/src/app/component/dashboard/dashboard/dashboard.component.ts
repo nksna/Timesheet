@@ -42,6 +42,7 @@ export class DashboardComponent {
         if (savedState && savedState.STime === 'Start Time') {
           this.startTimeString = savedState.startTimeString;
           this.STime = 'Stop Time';
+          this.startTime = new Date(this.newdate.toDateString() + ' ' + savedState.startTimeString);
         }
       });
   }
@@ -156,8 +157,9 @@ export class DashboardComponent {
       status: this.minutes >= 1 ? 'Approved' : 'Pending',
     };
     this.dashboardservice.StartTime(this.userid.uid, user);
+    this.getAttendance()
   }
-
+  removeDuplicatesArrayById:any;
   getAttendance() {
     this.firestore
       .collection('attendace') // Note: Check if it's 'attendance' instead of 'attendace'
@@ -180,6 +182,13 @@ export class DashboardComponent {
         });
         console.log(this.attendance, 'data'); // Log the filtered data to the console
       });
+      this.removeDuplicatesArrayById = this.removeDuplicates(this.attendance, "uid")
+      console.log(this.removeDuplicatesArrayById,"newdata")
+  }
+  removeDuplicates(myArray:any, Prop:any) {
+    return myArray.filter((obj:any, pos:any, arr:any) => {
+      return arr.map((mapObj:any) => mapObj[Prop]).indexOf(obj[Prop]) === pos;
+    });
   }
   statusCode(code: string) {
     let codes;
