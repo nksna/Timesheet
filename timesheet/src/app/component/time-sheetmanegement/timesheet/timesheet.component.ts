@@ -6,43 +6,45 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
   styleUrl: './timesheet.component.css',
 })
 export class TimesheetComponent implements OnInit {
-  Userdata: any[]=[];
+  Userdata: any[] = [];
   userRole: any;
-  attendance:any=[];
-  userid:any;
-  constructor(private firestore: AngularFirestore) {}
+  attendance: any = [];
+  userid: any;
+  attendanceData: any;
 
-   ngOnInit(): void {
-     this.getAllUsersData()
-     this.getAttendance()
-   
-     const dataget = localStorage.getItem('token2');
-     if (dataget != null) {
-       this.userid = JSON.parse(dataget);
-     }
-     if (this.userid) {
-       this.firestore
-         .collection('users')
-         .doc(this.userid.uid)
-         .valueChanges()
-         .subscribe(
-           (data) => {
-             // Handle successful data retrieval
-             if (data) {
-               this.userRole = data;
-               console.log(this.userRole, 'user1');
-             } else {
-               console.log('User not found for userId1');
-             }
-           },
-           (error) => {
-             // Handle errors
-             console.error('Error getting user data:', error);
-           }
-         );
-     }
-   }
-  
+  constructor(private firestore: AngularFirestore) { }
+
+  ngOnInit(): void {
+    this.getAllUsersData()
+    this.getAttendance()
+
+    const dataget = localStorage.getItem('token2');
+    if (dataget != null) {
+      this.userid = JSON.parse(dataget);
+    }
+    if (this.userid) {
+      this.firestore
+        .collection('users')
+        .doc(this.userid.uid)
+        .valueChanges()
+        .subscribe(
+          (data) => {
+            // Handle successful data retrieval
+            if (data) {
+              this.userRole = data;
+
+            } else {
+              console.log('User not found for userId1');
+            }
+          },
+          (error) => {
+            // Handle errors
+            console.error('Error getting user data:', error);
+          }
+        );
+    }
+  }
+
   // Assuming you want to fetch data for all users
   getAllUsersData() {
     this.firestore
@@ -50,9 +52,9 @@ export class TimesheetComponent implements OnInit {
       .get()
       .subscribe((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-          this.Userdata.push(doc.data()) 
+          this.Userdata.push(doc.data())
           // You can do something with each user data here
-         console.log(this.Userdata)
+          console.log(this.Userdata)
         });
       });
   }
@@ -63,13 +65,16 @@ export class TimesheetComponent implements OnInit {
       .subscribe((querySnapshot) => {
         this.attendance = [];  // Clear the array before populating it
         querySnapshot.forEach((doc) => {
-          this.attendance.push(doc.data());
+          const attendanceData = doc.data();
+          const attendanceId = doc.id;
+          // Include both data and ID in the array
+          this.attendance.push({ id: attendanceId, data: attendanceData });
+
         });
-        console.log(this.attendance);  // Log the data to the console
       });
   }
 
-  statusCode(code:string){
+  statusCode(code: string) {
     let codes;
     switch (code) {
       case 'Approved':
@@ -78,12 +83,63 @@ export class TimesheetComponent implements OnInit {
       case 'Pending':
         codes = 'status-pending';
         break;
-        case 'Reject':
+      case 'Reject':
         codes = 'status-reject';
         break;
       default:
         break;
     }
-  return codes;
+    return codes;
+  }
+  deleteUser(userId: string) {
+    if (confirm('Are you sure you want to delete this user?')) {
+      this.firestore
+        .collection('attendace')
+        .doc(userId)
+        .delete()
+        .then(() => {
+          console.log('User deleted successfully!');
+        })
+        .catch((error) => {
+          console.error('Error deleting user:', error);
+        });
+    }
+    this.getAttendance()
+  }
+
+  approveAttendance(attendanceId: string) {
+    // Assuming 'attendace' is the correct collection name
+    this.updateAttendanceStatusByUserId(attendanceId, 'Approved');
+    this.getAttendance()
+  }
+
+  rejectAttendance(attendanceId: string) {
+    // Assuming 'attendace' is the correct collection name
+    this.updateAttendanceStatusByUserId(attendanceId, 'Reject');
+    this.getAttendance()
+  }
+
+  private updateAttendanceStatusByUserId(userId: string, status: string) {
+
+
+    // Check if a matching document was found
+
+    // Update the document with the new status
+    this.firestore
+      .collection('attendace')
+      .doc(userId)
+
+      .update({
+        'startTime.status': status,
+        // Add other fields you may want to update here
+      })
+      .then(() => {
+        console.log('Attendance status updated successfully!');
+      })
+      .catch((error) => {
+        console.error('Error updating attendance status:', error);
+      })
+
+
   }
 }

@@ -32,8 +32,8 @@ export class DashboardComponent {
     private dashboardservice: DashboardService,
     private toastrService: ToastrService,
     private firestore: AngularFirestore
-  ) {}
-  initializeStateFromFirestore(userId: string) {
+  ) { }
+  initializeStateFromFirestore(userId?: string) {
     this.firestore
       .collection('userStates')
       .doc(userId)
@@ -120,21 +120,9 @@ export class DashboardComponent {
       this.stopTime = null;
       const userId = this.userid.uid;
       this.saveStateToFirestore(userId);
-      this.starttimemoring();
-      const user = {
-        StartTime: this.startTimeString,
-        StopTime: this.stopTimeString,
-        totalhours: `${this.formatTimeComponent(
-          this.hours
-        )}:${this.formatTimeComponent(
-          this.minutes % 60
-        )}:${this.formatTimeComponent(this.seconds % 60)}`,
-        updateDate: new Date(),
-        status: this.minutes >= 1 ? 'Approved' : 'Pending',
-      };
-      this.TimesheetArray.push(user);
-      this.toastrService.success('Login successfully', 'Welcome');
-      this.startTimeString = '';
+      this.starttimemoring()
+      this.toastrService.success('Attendance Done', 'Successfully');
+      this.startTimeString = ""
     } else {
       console.warn('Start time is not recorded.');
     }
@@ -144,6 +132,7 @@ export class DashboardComponent {
     return JSON.stringify(value).length == 2 ? value.toString() : '0' + value;
   }
   starttimemoring() {
+    this.initializeStateFromFirestore()
     const user = {
       userid: this.userid.uid,
       StartTime: this.startTimeString,
@@ -166,14 +155,11 @@ export class DashboardComponent {
       .get()
       .subscribe((querySnapshot) => {
         this.attendance = []; // Clear the array before populating it
-        const loggedUserId = this.userid.uid; // Assuming 'uid' is the user id field in the 'userid' object
-        debugger;
+        this.attendanceData = []; // Clear the array before populating it
+        const loggedUserId = this.userid.uid;
         querySnapshot.forEach((doc) => {
           console.log(doc, 'dco');
           this.attendanceData.push(doc.data());
-          // if (this.attendanceData.startTime.userid === loggedUserId) {
-          //   this.attendance.push(this.attendanceData);
-          // }
         });
         this.attendanceData.filter((res: any) => {
           if (res.uid === loggedUserId) {

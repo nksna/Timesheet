@@ -35,7 +35,7 @@ export class AuthService {
        
       },
       (err: any) => {
-        alert(err.message);
+        this.toastrService.showError('Login Failed','Retry');
         this.router.navigateByUrl('/login');
       }
     );
@@ -44,10 +44,10 @@ export class AuthService {
   Resetpassword(Email: any) {
     this.fire.sendPasswordResetEmail(Email).then(
       () => {
-        alert('code Successfully send');
+        this.toastrService.showSuccess('code Successfully send','Successfull');
       },
       (err: any) => {
-        alert(err.message);
+        this.toastrService.showError('code not send','Retry');
       }
     );
   }
@@ -59,13 +59,13 @@ export class AuthService {
         if (res) {
           console.log(res.email, res, 'res');
           localStorage.setItem('token', res.user);
-          alert('Registration successful');
+          this.toastrService.showSuccess('Registration successful','Successfull');
 
           this.router.navigateByUrl('/Layout');
         }
       })
       .catch((err: any) => {
-        alert(err.message);
+        this.toastrService.showError('Registration Failed','Retry');
         this.router.navigateByUrl('/register');
       });
   }
@@ -85,17 +85,17 @@ export class AuthService {
         })
         .then(() => {
           console.log('Firestore write successful');
-          alert('Register successfully');
+          this.toastrService.showSuccess('Register successfully','Successfull');
         })
         .catch((writeErr: any) => {
           console.error('Firestore write failed:', writeErr);
-          alert('Firestore write failed');
+          this.toastrService.showError('Firestore write failed','Try again');
         });
       }
     })
     .catch((err: any) => {
       console.error('User registration failed:', err);
-      alert(err.message);
+      this.toastrService.showError('Please Try Again','Registration Failed');
       this.router.navigateByUrl('/login');
     });
 }
