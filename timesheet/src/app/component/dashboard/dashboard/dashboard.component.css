@@ -1,4 +1,5 @@
-.attendance-container {
+@import 'ngx-toastr/toastr';
+ .attendance-container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
@@ -84,4 +85,4 @@ th {
   color: red;
 }
 /* your-component.component.css */
-@import '~ngx-toastr/toastr.css';
+

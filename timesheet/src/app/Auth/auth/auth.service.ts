@@ -69,35 +69,7 @@ export class AuthService {
         this.router.navigateByUrl('/register');
       });
   }
-
-  updateUser(uid: any, newData: any): Promise<void> {
-    const userDocRef = this.firestore.collection('users').doc(uid);
-    return userDocRef
-      .set(newData, { merge: true })
-      .then(() => {
-        console.log('User data updated successfully');
-      })
-      .catch((error) => {
-        console.error(`Error updating user data for UID ${uid}:`, error);
-        throw error;
-      });
-  }
-
-  loginuser(uid: any, userdata: any): Promise<void> {
-    const userDocRef1 = this.firestore.collection('detail').doc(uid);
-    return userDocRef1
-      .set(userdata, { merge: true })
-      .then(() => {
-        console.log('User data updated successfully');
-      })
-      .catch((error) => {
-        console.error(`Error updating user data for UID ${uid}:`, error);
-        throw error;
-      });
-  }
- 
-
-Register(payload: any): void {
+ Register(payload: any): void {
   this.fire.createUserWithEmailAndPassword(payload.email, payload.password)
     .then((res: any) => {
       if (res) {
@@ -106,6 +78,9 @@ Register(payload: any): void {
         // Use AngularFirestore to set data in Firestore
         this.firestore.collection('users').doc(res.user.uid).set({
           role: payload.role,
+          employeeid:payload.Employeeid,
+          emplooyeeteam:payload.Employeeteam,
+          employeeTl:payload.Employeeid
           // Add other user data as needed
         })
         .then(() => {

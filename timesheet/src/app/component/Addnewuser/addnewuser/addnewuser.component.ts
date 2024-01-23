@@ -27,7 +27,9 @@ export class AddnewuserComponent {
   data: any;
   emailforgat: any;
   Role: any;
-
+  Employeetl:any;
+  Employeeteam:any;
+  Employeeid:any
   Loginform() {
     if (this.email == '') {
       alert('please enter email');
@@ -39,6 +41,9 @@ export class AddnewuserComponent {
       email: this.email,
       password: this.password,
       role: this.Role,
+      Employeetl:this.Employeetl,
+      Employeeteam:this.Employeeteam,
+      Employeeid:this.Employeeid
     };
     this.authservice.Register(payload);
     this.email = '';
