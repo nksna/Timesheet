@@ -25,7 +25,7 @@ export class HeaderComponent {
         this.toaster.showSuccess('logout','successfully')
       },
       (err: any) => {
-        alert(err.message);
+        this.toaster.showError('logout','Failed');
       }
     );
   }

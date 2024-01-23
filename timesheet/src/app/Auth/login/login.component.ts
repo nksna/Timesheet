@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
+import { ToasterService } from '../../toaster.service';
 
 @Component({
   selector: 'app-login',
@@ -8,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrl: './login.component.css',
 })
 export class LoginComponent {
-  constructor(private authservice: AuthService, private router: Router) {}
+  constructor(private authservice: AuthService, private router: Router, private toastrService:ToasterService) {}
   loginform: any;
   password: any = '';
   email: any = '';
@@ -18,10 +19,10 @@ export class LoginComponent {
   ngOnInit(): void {}
   Loginform() {
     if (this.email == '') {
-      alert('please enter email');
+      this.toastrService.showError('please enter email','Enter Mail');
     }
     if (this.password == '') {
-      alert('please enter email');
+      this.toastrService.showError('please enter password','Enter Password');
     }
     let payload = {
       email: this.email,
@@ -36,7 +37,7 @@ export class LoginComponent {
   }
   Send() {
     if (this.emailforgat == '') {
-      alert('enter email to continue');
+      this.toastrService.showError('enter email to continue','Enter Mail');
     }
     this.authservice.Resetpassword(this.emailforgat);
   }

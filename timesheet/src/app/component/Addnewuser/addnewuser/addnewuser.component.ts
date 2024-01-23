@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../../Auth/auth/auth.service';
 import { Router } from '@angular/router';
+import { ToasterService } from '../../../toaster.service';
 
 @Component({
   selector: 'app-addnewuser',
@@ -8,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrl: './addnewuser.component.css',
 })
 export class AddnewuserComponent {
-  constructor(private router: Router, private authservice: AuthService) {}
+  constructor(private router: Router, private authservice: AuthService, private toastrService:ToasterService) {}
   loginform: any;
   loginObj: any = {
     userName: '',
@@ -32,10 +33,10 @@ export class AddnewuserComponent {
   Employeeid:any
   Loginform() {
     if (this.email == '') {
-      alert('please enter email');
+      this.toastrService.showError('enter email to continue','Enter Mail');
     }
     if (this.password == '') {
-      alert('please enter email');
+      this.toastrService.showError('enter password to continue','Enter Password');
     }
     let payload = {
       email: this.email,

@@ -1,35 +1,36 @@
-
-
-
-
 <div class="content mt-3" *ngIf="userRole.role === 'admin'"> 
     <!-- Additional content goes here -->
     <table>
-      <thead>
-          <tr>
-              <th>SNo</th>
-              <th>Employee id</th>
-              <th>Start Time</th>
-              <th>Stop Time</th>
-              <th>Total Hour</th>
-              <td>Updatedate</td>
-              <th>Status</th>
-              <th>Updated By</th>
-          </tr>
-      </thead>
-      <tbody>
-          <tr *ngFor="let x of attendance; let i = index">
-              <td>{{i+1}}</td>
-              <td>{{x.startTime.userid}}</td>
-              <td> {{x.startTime.StartTime}}</td>
-              <td> {{x.startTime.StopTime}}</td>
-              
-              <td>{{ x.startTime.totalhours}}</td>
-              <td>{{ x.startTime.updateDate.toDate() | date: 'yyyy-MM-dd' }}</td>
-              <td [ngClass]="statusCode(x.startTime.status)"> <ul><li>{{x.startTime.status}}</li></ul></td>
-              <td>{{ x.startTime.updateby ? x.startTime.updateby : 'Krishna' }}</td>
-
-          </tr>
-      </tbody>
+        <thead>
+            <tr>
+                <th>SNo</th>
+                <th>Employee id</th>
+                <th>Start Time</th>
+                <th>Stop Time</th>
+                <th>Total Hour</th>
+                <th>Updatedate</th>
+                <th>Status</th>
+                <th>Updated By</th>
+                <th>Action</th> <!-- New column for actions -->
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let x of attendance; let i = index">
+                <td>{{i+1}}</td>
+                <td>{{x.data.startTime.userid}}</td>
+                <td>{{x.data.startTime.StartTime}}</td>
+                <td>{{x.data.startTime.StopTime}}</td>
+                <td>{{x.data.startTime.totalhours}}</td>
+                <td>{{x.data.startTime.updateDate.toDate() | date: 'yyyy-MM-dd'}}</td>
+                <td [ngClass]="statusCode(x.data.startTime.status)"><ul><li>{{x.data.startTime.status}}</li></ul></td>
+                <td>{{x.data.startTime.updateby ? x.data.startTime.updateby : 'Krishna'}}</td>
+                <td *ngIf="userRole.role === 'admin'">
+                    <!-- Add icons or buttons for delete, approve, and reject -->
+                    <button (click)="deleteUser(x.id)">Delete</button>
+                    <button (click)="approveAttendance(x.id)">Approve</button>
+                    <button (click)="rejectAttendance(x.id)">Reject</button>
+                </td>
+            </tr>
+        </tbody>
     </table>
-  </div>
+</div>
