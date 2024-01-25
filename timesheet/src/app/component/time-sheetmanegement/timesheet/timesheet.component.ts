@@ -11,13 +11,14 @@ export class TimesheetComponent implements OnInit {
   attendance: any = [];
   userid: any;
   attendanceData: any;
+  isLoading: boolean=false;
 
   constructor(private firestore: AngularFirestore) { }
 
   ngOnInit(): void {
     this.getAllUsersData()
     this.getAttendance()
-
+    this.isLoading=true
     const dataget = localStorage.getItem('token2');
     if (dataget != null) {
       this.userid = JSON.parse(dataget);
@@ -69,7 +70,7 @@ export class TimesheetComponent implements OnInit {
           const attendanceId = doc.id;
           // Include both data and ID in the array
           this.attendance.push({ id: attendanceId, data: attendanceData });
-
+          this.isLoading = false
         });
       });
   }

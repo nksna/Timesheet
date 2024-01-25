@@ -32,3 +32,101 @@ th {
 .status-reject {
     color: red;
 }
+
+@import 'ngx-toastr/toastr';
+ .attendance-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #f0f0f0;
+  }
+  
+  .header .left {
+    display: flex;
+    align-items: center;
+  }
+  
+  .header .date {
+    margin-right: 20px;
+  }
+  
+  .header .right button {
+    margin-left: 10px;
+  }
+  
+  .navbar {
+    background-color: #333;
+  }
+  
+  .navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+  }
+  
+  .navbar li {
+    margin-right: 20px;
+  }
+  
+  .navbar a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+  }
+  
+  .navbar a:hover {
+    color: #f0f0f0;
+  }
+  .container1{
+   padding-top:40px ;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+@media screen and (max-width: 600px) {
+    table {
+        overflow-x: auto;
+    }
+}
+
+.status-pending {
+    color: yellow;
+}
+.status-success{
+  color:green
+} 
+.status-reject {
+  color: red;
+}
+/* your-component.component.css */
+
+.loader-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.8);
+  z-index: 9999;
+}
