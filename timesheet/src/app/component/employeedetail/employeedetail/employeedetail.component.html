@@ -4,14 +4,16 @@
         <img src="path/to/profile-photo.jpg" alt="Profile Photo" class="img-fluid rounded-circle mb-3">
       </div>
       <div class="col-md-8">
-        <h2>{{ userData.Name }}</h2>
+        <h2>{{ userData.employeename }}</h2>
         <p>Age: {{ userData.Age }}</p>
-        <p>Education: {{ userData.Education }}</p>
+        <p>Education: {{ userData.employeeeducation }}</p>
+        <p>joiningDate:{{userData.joiningDate}}</p>
         <p>Passed Out: {{ userData.Passedout }}</p>
         <p>Employee ID: {{ userData.employeeid }}</p>
+        <p>Employeejob: {{ userData.employeejob }}</p>
         <p>Employee Team: {{ userData.emplooyeeteam }}</p>
         <p>TL Name: {{ userData.employeeTl }}</p>
-        <p>Address: {{ userData.Address }}</p>
+        <p>Address: {{ userData.employeeaddress }}</p>
         <p>Skills: {{ userData.Skills}}</p>
         <button class="btn btn-primary" (click)="openQtyModel(userData)">Update Profile</button>
         

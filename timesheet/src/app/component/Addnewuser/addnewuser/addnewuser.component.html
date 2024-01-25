@@ -1,95 +1,190 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-6 offset-md-3">
-      <div class="card my-5">
+<div class="container-fluid">
+  <div class="row justify-content-center align-items-center min-vh-100">
+    <div class="col-md-12">
+      <div class="card my-5" style="background-color: #e6f7ff;">
         <form class="card-body cardbody-color p-lg-5">
-          <div class="text-center">
-            <img
-              src="./assets/food-court.jpg"
-              class="img-fluid profile-image-pic img-thumbnail rounded-circle my-3"
-              width="200px"
-              alt="profile"
-            />
+          <div class="text-center mb-4">
+            <h2 class="mb-4">Add New User</h2>
           </div>
 
-          <div class="mb-3">
-            <input
-              type="email"
-              class="form-control"
-              id="password"
-              placeholder="email"
-              [(ngModel)]="email"
-              name="password"
-            />
+          <div class="row">
+            <div class="col-md-4 col-12">
+              <div class="mb-3">
+                <label for="email" class="form-label">Email <span style="color: red;">*</span></label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  placeholder="Email"
+                  [(ngModel)]="email"
+                  name="email"
+                  required
+                  style="width: 100%;"
+                />
+              </div>
+            </div>
+            <div class="col-md-4 col-12">
+              <div class="mb-3">
+                <label for="password" class="form-label">Password <span style="color: red;">*</span></label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="password"
+                  placeholder="Password"
+                  [(ngModel)]="password"
+                  name="password"
+                  required
+                  style="width: 100%;"
+                />
+              </div>
+            </div>
+            <div class="col-md-4 col-12">
+              <div class="mb-3">
+                <label for="role" class="form-label">Role <span style="color: red;">*</span></label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="role"
+                  placeholder="Role"
+                  [(ngModel)]="Role"
+                  name="role"
+                  required
+                  style="width: 100%;"
+                />
+              </div>
+            </div>
           </div>
-          <div class="mb-3">
-            <input
-              type="password"
-              class="form-control"
-              id="password"
-              placeholder="password"
-              [(ngModel)]="password"
-              name="password"
-            />
+
+          <!-- Additional Row 1 -->
+          <div class="row">
+            <div class="col-md-4 col-12">
+              <div class="mb-3">
+                <label for="employeeId" class="form-label">Employee ID</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="employeeId"
+                  placeholder="Employee ID"
+                  [(ngModel)]="Employeeid"
+                  name="employeeId"
+                  style="width: 100%;"
+                />
+              </div>
+            </div>
+            <div class="col-md-4 ccol-12">
+              <div class="mb-3">
+                <label for="employeeTeam" class="form-label">Employee Team</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="employeeTeam"
+                  placeholder="Employee Team"
+                  [(ngModel)]="Employeeteam"
+                  name="employeeTeam"
+                  style="width: 100%;"
+                />
+              </div>
+            </div>
+            <div class="col-md-4 col-12">
+              <div class="mb-3">
+                <label for="employeeTL" class="form-label">Employee TL</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="employeeTL"
+                  placeholder="Employee TL"
+                  [(ngModel)]="Employeetl"
+                  name="employeeTL"
+                  style="width: 100%;"
+                />
+              </div>
+            </div>
           </div>
-          <div class="mb-3">
-            <input
-              type="Role"
-              class="form-control"
-              id="Role"
-              placeholder="Role"
-              [(ngModel)]="Role"
-              name="Role"
-            />
+          <div class="row">
+            <div class="col-md-4 col-12">
+              <div class="mb-3">
+                <label for="joiningDate" class="form-label">Joining Date</label>
+                <input
+                  type="date"
+                  class="form-control"
+                  id="joiningDate"
+                  [(ngModel)]="joiningDate"
+                  name="joiningDate"
+                  style="width: 100%;"
+                />
+              </div>
+            </div>
+            <div class="col-md-4 col-12">
+              <div class="mb-3">
+                <label for="address" class="form-label">Address</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="address"
+                  placeholder="Address"
+                  [(ngModel)]="address"
+                  name="address"
+                  style="width: 100%;"
+                />
+              </div>
+            </div>
+        
+
+          
+            <div class="col-md-4 col-12">
+              <div class="mb-3">
+                <label for="job" class="form-label">Job</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="job"
+                  placeholder="Job"
+                  [(ngModel)]="job"
+                  name="job"
+                  style="width: 100%;"
+                />
+              </div>
+            
           </div>
-          <div class="mb-3">
-            <input
-              type="Employeeid"
-              class="form-control"
-              id="Role"
-              placeholder="Employeeid"
-              [(ngModel)]="Employeeid"
-              name="Employeeid"
-            />
+          <div class="row">
+            <div class="col-md-4 col-12">
+              <div class="mb-3">
+                <label for="education" class="form-label">Education</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="education"
+                  placeholder="Education"
+                  [(ngModel)]="education"
+                  name="education"
+                  style="width: 100%;"
+                />
+              </div>
+            </div>
           </div>
-          <div class="mb-3">
-            <input
-              type="Employeeteam"
-              class="form-control"
-              id="Employeeteam"
-              placeholder="Employeeteam"
-              [(ngModel)]="Employeeteam"
-              name="Employeeteam"
-            />
           </div>
-          <div class="mb-3">
-            <input
-              type="Employee TL"
-              class="form-control"
-              id="Employee TL"
-              placeholder="Employee TL"
-              [(ngModel)]="Employeetl"
-              name="Employee TL"
-            />
+          <div class="row justify-content-end" >
+            <div class="col-md-3 text-center">
+              <button
+                type="button"
+                class="btn btn-success px-5 mb-3 "
+                (click)="addNewUser()"
+              >
+                Add New User
+              </button>
+            </div>
+            <div class="col-md-2 text-center">
+              <button
+                type="button"
+                class="btn btn-secondary px-5 mb-3"
+                (click)="clearForm()"
+              >
+                Clear
+              </button>
+            </div>
           </div>
-          <div class="text-center">
-            <button
-              type="submit"
-              class="btn btn-color px-5 mb-5 w-100"
-              (click)="Loginform()"
-            >
-              Register
-            </button>
-          </div>
-          <div
-            id="emailHelp"
-            class="form-text text-center mb-5 text-dark pointere"
-          >
-            Registered?
-            <a (click)="login()" class="text-dark fw-bold">
-              Allready have an Account</a
-            >
-          </div>
+        
+       
         </form>
       </div>
     </div>
