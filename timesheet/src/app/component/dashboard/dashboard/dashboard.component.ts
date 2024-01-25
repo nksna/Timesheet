@@ -148,7 +148,7 @@ export class DashboardComponent {
         this.minutes % 60
       )}:${this.formatTimeComponent(this.seconds % 60)}`,
       updateDate: new Date(),
-      status: this.minutes >= 1 ? 'Approved' : 'Pending',
+      status:'Pending',
     };
     this.dashboardservice.StartTime(this.userid.uid, user);
     this.getAttendance()

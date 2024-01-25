@@ -9,48 +9,63 @@ import { ToasterService } from '../../../toaster.service';
   styleUrl: './addnewuser.component.css',
 })
 export class AddnewuserComponent {
-  constructor(private router: Router, private authservice: AuthService, private toastrService:ToasterService) {}
-  loginform: any;
-  loginObj: any = {
-    userName: '',
-    password: '',
-    mobileNo: '',
-    emailId: '',
-    role: '',
-    Adress: '',
-  };
-  username: string = '';
-  password: string = '';
-  Address: any = '';
+
   email: string = '';
-  mobilenumber: any = '';
-  name: any;
-  data: any;
-  emailforgat: any;
-  Role: any;
-  Employeetl:any;
-  Employeeteam:any;
-  Employeeid:any
-  Loginform() {
-    if (this.email == '') {
-      this.toastrService.showError('enter email to continue','Enter Mail');
+  password: string = '';
+  Role: string = '';
+  Employeeid: string = '';
+  Employeeteam: string = '';
+  Employeetl: string = '';
+  joiningDate: string = '';
+  name: string = '';
+  address: string = '';
+  job: string = '';
+  education: string = '';
+
+  constructor(private router: Router, private toastrService: ToasterService) {}
+
+  addNewUser() {
+    if (!this.email || !this.password || !this.Role) {
+      this.toastrService.showError('Please enter required fields', 'Incomplete Form');
+      return;
     }
-    if (this.password == '') {
-      this.toastrService.showError('enter password to continue','Enter Password');
-    }
-    let payload = {
+
+    // Additional logic for adding a new user
+    // You can use the form values (this.email, this.password, etc.) to send a request or perform any action
+    console.log('Adding new user:', {
       email: this.email,
       password: this.password,
-      role: this.Role,
-      Employeetl:this.Employeetl,
-      Employeeteam:this.Employeeteam,
-      Employeeid:this.Employeeid
-    };
-    this.authservice.Register(payload);
-    this.email = '';
-    this.password = '';
+      Role: this.Role,
+      Employeeid: this.Employeeid,
+      Employeeteam: this.Employeeteam,
+      Employeetl: this.Employeetl,
+      joiningDate: this.joiningDate,
+      name: this.name,
+      address: this.address,
+      job: this.job,
+      education: this.education
+    });
+
+    // Clear form fields after adding a new user
+    this.clearForm();
   }
+
   login() {
     this.router.navigateByUrl('/login');
   }
-}
+
+  clearForm() {
+    this.email = '';
+    this.password = '';
+    this.Role = '';
+    this.Employeeid = '';
+    this.Employeeteam = '';
+    this.Employeetl = '';
+    this.joiningDate = '';
+    this.name = '';
+    this.address = '';
+    this.job = '';
+    this.education = '';
+  }
+
+ }

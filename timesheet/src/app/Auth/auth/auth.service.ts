@@ -80,7 +80,12 @@ export class AuthService {
           role: payload.role,
           employeeid:payload.Employeeid,
           emplooyeeteam:payload.Employeeteam,
-          employeeTl:payload.Employeeid
+          employeeTl:payload.Employeeid,
+          employeename:payload.name,
+          employeeaddress:payload.address,
+          employeejoindate:payload.joiningDate,
+          employeejob:payload.job,
+          employeeeducation:payload.education
           // Add other user data as needed
         })
         .then(() => {

@@ -65,9 +65,11 @@ export class EmployeedetailComponent implements OnInit {
     if (model != null) {
       model.style.display = "block";
     }
-    this.name=userData.Name;
+    this.name=userData.employeename;
     this.mobilenumber=userData.Mobilenumber;
-    this.address=userData.Address
+    this.address=userData.employeeaddress;
+    this.education=userData.employeeeducation;
+    this.skills =userData.skills
   }
   closeQtyModel() {
     const model = document.getElementById('myModal')
@@ -78,12 +80,12 @@ export class EmployeedetailComponent implements OnInit {
   updateprofile(){
     const uid=this.userid.uid;
     const user={
-      "Name":this.name,
+      "employeename":this.name,
       "Age":this.age,
       "Mobilenumber":this.mobilenumber,
-      "Education":this.education,
+      "employeeeducation":this.education,
       "Passedout":this.passsedout,
-      "Address":this.address,
+      "employeeaddress":this.address,
       "Skills":this.skills
     }
       this.employeedetailService.updateUser(uid,user)

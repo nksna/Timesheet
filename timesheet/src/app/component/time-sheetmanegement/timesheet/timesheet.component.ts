@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-timesheet',
   templateUrl: './timesheet.component.html',
@@ -13,7 +14,7 @@ export class TimesheetComponent implements OnInit {
   attendanceData: any;
   isLoading: boolean=false;
 
-  constructor(private firestore: AngularFirestore) { }
+  constructor(private firestore: AngularFirestore,private toastr:ToastrService) { }
 
   ngOnInit(): void {
     this.getAllUsersData()
@@ -30,7 +31,7 @@ export class TimesheetComponent implements OnInit {
         .valueChanges()
         .subscribe(
           (data) => {
-            // Handle successful data retrieval
+            
             if (data) {
               this.userRole = data;
 
@@ -39,8 +40,8 @@ export class TimesheetComponent implements OnInit {
             }
           },
           (error) => {
-            // Handle errors
-            console.error('Error getting user data:', error);
+            
+            this.toastr.error('Error updating attendance status:', error)
           }
         );
     }
@@ -99,7 +100,7 @@ export class TimesheetComponent implements OnInit {
         .doc(userId)
         .delete()
         .then(() => {
-          console.log('User deleted successfully!');
+          this.toastr.success('delete user attendance succesfully','')
         })
         .catch((error) => {
           console.error('Error deleting user:', error);
@@ -125,7 +126,7 @@ export class TimesheetComponent implements OnInit {
 
     // Check if a matching document was found
 
-    // Update the document with the new status
+    if (confirm('Are you sure?')) {
     this.firestore
       .collection('attendace')
       .doc(userId)
@@ -135,12 +136,54 @@ export class TimesheetComponent implements OnInit {
         // Add other fields you may want to update here
       })
       .then(() => {
-        console.log('Attendance status updated successfully!');
+       this.toastr.success('update succesfully',status)
       })
       .catch((error) => {
-        console.error('Error updating attendance status:', error);
+        this.toastr.error('Error updating attendance status:', error)
+
+       
       })
 
 
+  }}
+  searchTerm: string = '';
+  sortField: string = 'SNo';
+  sortDirection: string = 'asc';
+
+  get filteredAttendance() {
+    let filteredData = this.attendance.filter((item:any) =>
+      item.data.startTime.userid.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+      item.data.startTime.StartTime.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+      item.data.startTime.StopTime.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+      item.data.startTime.totalhours.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+      item.data.startTime.updateDate.toDate().toString().toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+      item.data.startTime.status.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+      item.data.startTime.updateby.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
+  
+    return filteredData.sort((a:any, b:any) => {
+      const fieldA = a.data.startTime[this.sortField].toString().toLowerCase();
+      const fieldB = b.data.startTime[this.sortField].toString().toLowerCase();
+  
+      let comparison = 0;
+      if (fieldA > fieldB) {
+        comparison = 1;
+      } else if (fieldA < fieldB) {
+        comparison = -1;
+      }
+  
+      return this.sortDirection === 'asc' ? comparison : -comparison;
+    });
+  }
+
+  sortData(field: string) {
+    if (field === this.sortField) {
+      // If the same field is clicked, toggle the sort direction
+      this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+    } else {
+      // If a different field is clicked, set the new field and default to ascending
+      this.sortField = field;
+      this.sortDirection = 'asc';
+    }
   }
 }
