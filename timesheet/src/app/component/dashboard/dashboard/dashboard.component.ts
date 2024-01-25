@@ -27,6 +27,9 @@ export class DashboardComponent {
   userid: any;
   attendance: any = [];
   attendanceData: any = [];
+  isLoading:boolean=false;
+  attendanceDetails: any = {};
+  dropdown: boolean[] = [];
 
   constructor(
     private dashboardservice: DashboardService,
@@ -48,12 +51,14 @@ export class DashboardComponent {
   }
 
   ngOnInit() {
+    this.isLoading=true
     const dataget = localStorage.getItem('token2');
     if (dataget != null) {
       this.userid = JSON.parse(dataget);
     }
     this.initializeStateFromFirestore(this.userid.uid);
     this.getAttendance();
+   
   }
 
   logout() {
@@ -150,6 +155,7 @@ export class DashboardComponent {
   }
   removeDuplicatesArrayById:any;
   getAttendance() {
+  
     this.firestore
       .collection('attendace') // Note: Check if it's 'attendance' instead of 'attendace'
       .get()
@@ -164,12 +170,13 @@ export class DashboardComponent {
         this.attendanceData.filter((res: any) => {
           if (res.uid === loggedUserId) {
             this.attendance.push(res);
+            this.isLoading = false
           }
         });
         console.log(this.attendance, 'data'); // Log the filtered data to the console
       });
       this.removeDuplicatesArrayById = this.removeDuplicates(this.attendance, "uid")
-      console.log(this.removeDuplicatesArrayById,"newdata")
+      console.log(this.removeDuplicatesArrayById,"newdata") 
   }
   removeDuplicates(myArray:any, Prop:any) {
     return myArray.filter((obj:any, pos:any, arr:any) => {
@@ -193,4 +200,21 @@ export class DashboardComponent {
     }
     return codes;
   }
+
+  viewAttendance() {
+    // Set the details for the modal
+    alert("dghg");
+   
+  }
+
+  editAttendance() {
+    // Set the details for the modal
+    
+    alert("dghg");
+  }
+
+  clickonview(index: number) {
+    this.dropdown[index] = !this.dropdown[index];
+  }
+  
 }
