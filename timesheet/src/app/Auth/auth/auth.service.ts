@@ -77,11 +77,10 @@ export class AuthService {
 
         // Use AngularFirestore to set data in Firestore
         this.firestore.collection('users').doc(res.user.uid).set({
-          role: payload.role,
+          role: payload.Role,
           employeeid:payload.Employeeid,
           emplooyeeteam:payload.Employeeteam,
           employeeTl:payload.Employeeid,
-          employeename:payload.name,
           employeeaddress:payload.address,
           employeejoindate:payload.joiningDate,
           employeejob:payload.job,

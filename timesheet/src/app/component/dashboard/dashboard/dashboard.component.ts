@@ -170,13 +170,15 @@ export class DashboardComponent {
         this.attendanceData.filter((res: any) => {
           if (res.uid === loggedUserId) {
             this.attendance.push(res);
-            this.isLoading = false
+            
           }
         });
+        this.isLoading = false
         console.log(this.attendance, 'data'); // Log the filtered data to the console
       });
       this.removeDuplicatesArrayById = this.removeDuplicates(this.attendance, "uid")
       console.log(this.removeDuplicatesArrayById,"newdata") 
+    
   }
   removeDuplicates(myArray:any, Prop:any) {
     return myArray.filter((obj:any, pos:any, arr:any) => {

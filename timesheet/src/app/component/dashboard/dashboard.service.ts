@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { BehaviorSubject } from 'rxjs';
@@ -7,7 +8,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class DashboardService {
 
-  constructor(private firestore:AngularFirestore) { }
+  constructor(private firestore:AngularFirestore,private http:HttpClient) { }
   private state = {
     STime: 'Start Time',
     startTimeString: '',
@@ -38,4 +39,7 @@ export class DashboardService {
       });
   }
   
+  get(){
+    return this.http.get('http://localhost:2000/home');
+  }
 }

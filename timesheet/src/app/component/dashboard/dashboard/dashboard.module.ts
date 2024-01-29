@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { DashboardComponent } from './dashboard.component';
 import { DashboardRoutingModule } from '../dashboard-routing.module';
 import { ToastrModule } from 'ngx-toastr';
+import { HttpClientModule } from '@angular/common/http';
+import { DashboardService } from '../dashboard.service';
 
 
 @NgModule({
@@ -10,12 +12,13 @@ import { ToastrModule } from 'ngx-toastr';
     DashboardComponent
   ],
   imports: [
-    CommonModule, DashboardRoutingModule,ToastrModule.forRoot({
+    CommonModule,HttpClientModule, DashboardRoutingModule,ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-top-right',
       preventDuplicates: true
       
     })
   ]
+  ,providers:[DashboardService]
 })
 export class DashboardModule { }
