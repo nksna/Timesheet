@@ -9,8 +9,10 @@ import { ToasterService } from '../../../toaster.service';
   styleUrl: './addnewuser.component.css',
 })
 export class AddnewuserComponent {
-
-  email: string = '';
+  constructor(private router: Router, private authservice: AuthService, private toastrService:ToasterService) {}
+  
+  email:any
+  username: string = '';
   password: string = '';
   Role: string = '';
   Employeeid: string = '';
@@ -22,7 +24,6 @@ export class AddnewuserComponent {
   job: string = '';
   education: string = '';
 
-  constructor(private router: Router, private toastrService: ToasterService) {}
 
   addNewUser() {
     if (!this.email || !this.password || !this.Role) {
@@ -32,7 +33,7 @@ export class AddnewuserComponent {
 
     // Additional logic for adding a new user
     // You can use the form values (this.email, this.password, etc.) to send a request or perform any action
-    console.log('Adding new user:', {
+    const payload= {
       email: this.email,
       password: this.password,
       Role: this.Role,
@@ -44,15 +45,12 @@ export class AddnewuserComponent {
       address: this.address,
       job: this.job,
       education: this.education
-    });
-
+    }
+    this.authservice.Register(payload)
     // Clear form fields after adding a new user
     this.clearForm();
   }
 
-  login() {
-    this.router.navigateByUrl('/login');
-  }
 
   clearForm() {
     this.email = '';
