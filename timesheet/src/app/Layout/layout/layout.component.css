@@ -8,10 +8,20 @@
 }
 
 .expanded {
-  width: 50%;
+  width: 100%;
   transition: width 0.3s;
 }
-
+@media (max-width: 412px) {
+  .nav-cls {
+    width: 50%;
+  }
+  .body-cls {
+    height: 580px;
+    width: 50%;
+    padding: 20px 20px 20px 20px;
+    overflow-y: scroll;
+  }
+}
 .nav-cls {
   width: 15%;
 }
@@ -19,17 +29,30 @@
 .body-cls {
   height: 580px;
   width: 85%;
-  padding: 20px 50px 20px 50px;
+  padding: 20px 20px 20px 20px;
   overflow-y: scroll;
 }
 
 
 .collapsed {
-  height: 580px;
+  height: 100%;
   width: 100%;
   padding: 20px 50px 20px 50px;
   overflow-y: scroll;
 }
 
 /* Media query for small screens */
-
+@media only screen and (max-width: 300px) {
+  .collapsed {
+    height: auto; /* Adjust to your needs */
+    width: 100%;
+    padding: 10px; /* Adjust to your needs */
+    overflow-y: auto;
+  }
+  .body-cls {
+    height: 100%;
+    width: 100%;
+    padding: 20px 20px 20px 20px;
+    overflow-y: auto;
+  }
+}

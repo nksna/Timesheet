@@ -4,8 +4,8 @@ nav, .sidebar-sticky {
   top: 48px;
   min-height: 85vh;
   background-color: #010a14;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  /* padding: 10px; */
+  /* border-right: 1px solid #ddd; */
   color: #ddd; 
 }
 
@@ -14,8 +14,17 @@ nav, .sidebar-sticky {
 }
 
 .collapse {
+  
   width: 200px;
 }
 .nav-link {
   color: aliceblue;
+}
+@media only screen and (max-width: 300px) {
+  .collapsed {
+    width: 50%;
+    padding: 10px;
+    overflow-y: auto;
+  }
+  
 }

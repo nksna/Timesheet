@@ -12,47 +12,54 @@
         
       </div>
     </div>
-    <div class="content mt-3"> 
+    <div class="content mt-3">
       <!-- Additional content goes here -->
-      <table>
-        <thead>
-            <tr>
-                <th>SNo</th>
-                <th>Employee id</th>
-                <th>Start Time</th>
-                <th>Stop Time</th>
-                <th>Total Hour</th>
-                <td>Updatedate</td>
-                <th>Status</th>
-                <th>Updated By</th>
-                <th>Daily Status</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let x of attendance; let i = index">
-                <td>{{i+1}}</td>
-                <td>{{x.startTime.userid}}</td>
-                <td> {{x.startTime.StartTime}}</td>
-                <td> {{x.startTime.StopTime}}</td>
-                
-                <td>{{ x.startTime.totalhours}}</td>
-                <td>{{ x.startTime.updateDate.toDate() | date: 'yyyy-MM-dd' }}</td>
-                <td [ngClass]="statusCode(x.startTime.status)"> <ul><li>{{x.startTime.status}}</li></ul></td>
-                <td>{{ x.startTime.updateby ? x.startTime.updateby : 'Krishna' }}</td>
-                <td>
-                  <div ngbDropdown>
-                    <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton" ngbDropdownToggle (click)="clickonview(i)">
-                      <i class="bi bi-three-dots-vertical"></i>
-                    </button>
-                    <div ngbDropdownMenu aria-labelledby="dropdownMenuButton" *ngIf="dropdown[i]">
-                      <button class="dropdown-item" (click)="viewAttendance()">View</button>
-                      <button class="dropdown-item" (click)="editAttendance()">Edit</button>
+      <div class="card">
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>SNo</th>
+                  <th>Employee name</th>
+                  <th>Start Time</th>
+                  <th>Stop Time</th>
+                  <th>Total Hour</th>
+                  <th>Updatedate</th>
+                  <th>Status</th>
+                  <th>Updated By</th>
+                  <th>Daily Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let x of attendance; let i = index">
+                  <td>{{ i+1 }}</td>
+                  <td>{{ x.name }}</td>
+                  <td>{{ x.startTime.StartTime }}</td>
+                  <td>{{ x.startTime.StopTime }}</td>
+                  <td>{{ x.startTime.totalhours }}</td>
+                  <td>{{ x.startTime.updateDate.toDate() | date: 'yyyy-MM-dd' }}</td>
+                  <td [ngClass]="statusCode(x.startTime.status)">{{ x.startTime.status }}</td>
+                  <td>{{ x.startTime.updateby ? x.startTime.updateby : 'Pending' }}</td>
+                  <td>
+                    <div ngbDropdown>
+                      <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton"
+                        ngbDropdownToggle (click)="clickonview(i)">
+                        <i class="bi bi-three-dots-vertical"></i>
+                      </button>
+                      <div ngbDropdownMenu aria-labelledby="dropdownMenuButton" *ngIf="dropdown[i]">
+                        <button class="dropdown-item" (click)="viewAttendance()">View</button>
+                        <button class="dropdown-item" (click)="editAttendance()">Edit</button>
+                      </div>
                     </div>
-                  </div>
-                </td>
-            </tr>
-        </tbody>
-      </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="d-flex justify-content-center align-items-center loader-overlay" *ngIf="isLoading">

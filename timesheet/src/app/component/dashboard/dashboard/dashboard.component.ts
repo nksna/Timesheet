@@ -30,6 +30,7 @@ export class DashboardComponent {
   isLoading:boolean=false;
   attendanceDetails: any = {};
   dropdown: boolean[] = [];
+  name:any;
 
   constructor(
     private dashboardservice: DashboardService,
@@ -58,7 +59,27 @@ export class DashboardComponent {
     }
     this.initializeStateFromFirestore(this.userid.uid);
     this.getAttendance();
-   
+    if (this.userid) {
+      this.firestore
+        .collection('users')
+        .doc(this.userid.uid)
+        .valueChanges()
+        .subscribe(
+          (data) => {
+            // Handle successful data retrieval
+            if (data) {
+              this.name = data;
+              console.log(this.name, 'user1');
+            } else {
+              console.log('User not found for userId1');
+            }
+          },
+          (error) => {
+            // Handle errors
+            console.error('Error getting user data:', error);
+          }
+        );
+    }
   }
 
   logout() {
@@ -150,7 +171,7 @@ export class DashboardComponent {
       updateDate: new Date(),
       status:'Pending',
     };
-    this.dashboardservice.StartTime(this.userid.uid, user);
+    this.dashboardservice.StartTime(this.userid.uid, user,this.name.employeename);
     this.getAttendance()
   }
   removeDuplicatesArrayById:any;

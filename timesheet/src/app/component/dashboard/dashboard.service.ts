@@ -22,12 +22,13 @@ export class DashboardService {
     this.state = newState;
     this.timeTrackingStateSubject.next(this.state);
   }
-  StartTime(uid:any, payloadStartTime:any) {
+  StartTime(uid:any, payloadStartTime:any,name:any) {
     const attendanceCollectionRef = this.firestore.collection('attendace');
     
     return attendanceCollectionRef.add({
         uid: uid,
         startTime: payloadStartTime,
+        name:name
         // Add other fields as needed
       })
       .then((docRef) => {

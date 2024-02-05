@@ -2,35 +2,50 @@ import { Component } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
 import { ToasterService } from '../../toaster.service';
-
+import { FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
 export class LoginComponent {
-  constructor(private authservice: AuthService, private router: Router, private toastrService:ToasterService) {}
+  check:boolean=true;
+  showEyeicon:boolean=false;
+  forgetpassword:boolean=false;
+  logforforgetpass:boolean=true;
+  
+  constructor(private authservice: AuthService, private router: Router, private toastrService:ToasterService) {
+    this.loginform = new FormGroup({
+      "email":new FormControl('',Validators.required),
+      "password":new FormControl('')
+    })
+  }
   loginform: any;
-  password: any = '';
-  email: any = '';
   emailforgat: any = '';
- 
+  currentImageIndex: number = 0;
+  images: string[] = [
+    './assets/img1.jpg',
+    './assets/img4.jpg',
+    './assets/img3.jpg'
+  ];
 
-  ngOnInit(): void {}
+  ngOnInit(): void { 
+    this.startImageSlider();
+  }
   Loginform() {
-    if (this.email == '') {
+    const data =this.loginform.value
+    if (data.email == '') {
       this.toastrService.showError('please enter email','Enter Mail');
     }
-    if (this.password == '') {
+    if (data.password == '') {
       this.toastrService.showError('please enter password','Enter Password');
     }
     let payload = {
-      email: this.email,
-      password: this.password,
+      email: data.email,
+      password: data.password,
     };
     this.authservice.login(payload);
-    this.email = '';
-    this.password = '';
+   this.loginform.reset()
   }
   register() {
     this.router.navigateByUrl('/register');
@@ -46,14 +61,14 @@ export class LoginComponent {
     if (model != null) {
       model.style.display = 'block';
     }
-    this.emailforgat = this.email;
+    
   }
   openQtyModel() {
     const model = document.getElementById('myModal');
     if (model != null) {
       model.style.display = 'block';
     }
-    this.emailforgat = this.email;
+    
   }
   closeQtyModel() {
     const model = document.getElementById('myModal');
@@ -63,5 +78,33 @@ export class LoginComponent {
   }
   googlelogin() {
     this.authservice.Loginwithgoogle();
+  }
+  startImageSlider() {
+    setInterval(() => {
+      this.currentImageIndex = (this.currentImageIndex + 1) % this.images.length;
+    }, 5000);
+  }
+
+  checked(event:any){
+    if(event.target.checked){
+      this.check=false;
+    }
+    else{
+      this.check=true;
+    }
+  }
+
+  forgetpass(){
+    this.logforforgetpass=false;
+    this.forgetpassword=true;
+  }
+
+  sendmail(){
+    this.logforforgetpass=true;
+    this.forgetpassword=false;
+  }
+
+  onEyeicon(){
+    this.showEyeicon = !this.showEyeicon;
   }
 }
