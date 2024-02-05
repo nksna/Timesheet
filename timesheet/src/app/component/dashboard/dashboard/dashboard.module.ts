@@ -5,6 +5,7 @@ import { DashboardRoutingModule } from '../dashboard-routing.module';
 import { ToastrModule } from 'ngx-toastr';
 import { HttpClientModule } from '@angular/common/http';
 import { DashboardService } from '../dashboard.service';
+import { EmployeedetailService } from '../../employeedetail/employeedetail/employeedetail.service';
 
 
 @NgModule({

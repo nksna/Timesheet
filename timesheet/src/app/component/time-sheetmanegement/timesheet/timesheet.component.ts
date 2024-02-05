@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../../../Auth/auth/auth.service';
+import { TimesheetmanagementService } from './timesheetmanagement.service';
 @Component({
   selector: 'app-timesheet',
   templateUrl: './timesheet.component.html',
@@ -14,7 +16,7 @@ export class TimesheetComponent implements OnInit {
   attendanceData: any;
   isLoading: boolean=false;
 
-  constructor(private firestore: AngularFirestore,private toastr:ToastrService) { }
+  constructor(private firestore: AngularFirestore,private toastr:ToastrService,private auth:AuthService) { }
 
   ngOnInit(): void {
     this.getAllUsersData()
@@ -108,10 +110,15 @@ export class TimesheetComponent implements OnInit {
     }
     this.getAttendance()
   }
-
-  approveAttendance(attendanceId: string) {
-    // Assuming 'attendace' is the correct collection name
-    this.updateAttendanceStatusByUserId(attendanceId, 'Approved');
+ getdata(attendanceId:any){
+  
+    
+    this.auth.getAttendance(attendanceId)
+ }
+  approveAttendance(attendanceId: any) {
+    this.auth.getAttendance(attendanceId);
+    this.updateAttendanceStatusByUserId(attendanceId.id, 'Approved');
+    this.getdata(attendanceId)
     this.getAttendance()
   }
 

@@ -1,3 +1,4 @@
+@import 'ngx-toastr/toastr';
 table {
     width: 100%;
     border-collapse: collapse;
@@ -33,7 +34,7 @@ th {
     color: red;
 }
 
-@import 'ngx-toastr/toastr';
+
  .attendance-container {
     max-width: 1200px;
     margin: 0 auto;
