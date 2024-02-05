@@ -45,7 +45,7 @@
                   <td>
                     <div ngbDropdown>
                       <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton"
-                        ngbDropdownToggle (click)="clickonview(i)">
+                        ngbDropdownToggle (click)="clickOnView(i)">
                         <i class="bi bi-three-dots-vertical"></i>
                       </button>
                       <div ngbDropdownMenu aria-labelledby="dropdownMenuButton" *ngIf="dropdown[i]">
@@ -60,12 +60,113 @@
           </div>
         </div>
       </div>
+<div>
+  <div class="header bg-light p-3">
+    <div class="left">
+      <div class="date">{{newdate | date:'MMM d, y'}}</div>
+      <div class="welcome">Welcome, {{ userName }}</div>
     </div>
-
-    <div class="d-flex justify-content-center align-items-center loader-overlay" *ngIf="isLoading">
-      <div class="spinner-border" role="status">
-        
+    <div class="right">
+      <div *ngIf="startTimeString && !stopTimeString">
+        {{'Start Time:' + startTimeString}}
       </div>
-      <span >Loading...</span>
-    </div> 
- 
+      <button [ngClass]="STime == 'Start Time'? 'btn btn-success':'btn btn-danger'"
+        (click)="starttime(STime)">{{STime}}</button>
+
+    </div>
+  </div>
+  <div class="content mt-3">
+    <!-- Additional content goes here -->
+    <table>
+      <thead>
+        <tr>
+          <th>SNo</th>
+          <th>Employee id</th>
+          <th>Start Time</th>
+          <th>Stop Time</th>
+          <th>Total Hour</th>
+          <td>Updatedate</td>
+          <th>Status</th>
+          <th>Updated By</th>
+          <th>Daily Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let x of attendance; let i = index">
+          <td>{{i+1}}</td>
+          <td>{{x.startTime.userid}}</td>
+          <td> {{x.startTime.StartTime}}</td>
+          <td> {{x.startTime.StopTime}}</td>
+
+          <td>{{ x.startTime.totalhours}}</td>
+          <td>{{ x.startTime.updateDate.toDate() | date: 'yyyy-MM-dd' }}</td>
+          <td [ngClass]="statusCode(x.startTime.status)">
+            <ul>
+              <li>{{x.startTime.status}}</li>
+            </ul>
+          </td>
+          <td>{{ x.startTime.updateby ? x.startTime.updateby : 'Krishna' }}</td>
+          <td>
+            <div class="position-relative">
+              <button class="btn btn-link" (click)="clickOnView(i)">
+                <i class="bi bi-three-dots-vertical"></i>
+              </button>
+              <div *ngIf="dropdown[i]" class="popover-custom">
+                <button class="btn btn-secondary" id="btn1" (click)="viewAttendance()">View</button>
+                <button class="btn btn-secondary" id="btn2" (click)="editAttendance()">Edit</button>
+              </div>
+            </div>
+          </td>
+        </tr>
+        
+        <!-- View Modal -->
+        <div class="modal" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="viewModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" style="max-width: 500px;">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">View Attendance</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <!-- Add your view modal content here -->
+                View Modal Content
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Edit Modal -->
+        <div class="modal" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" style="max-width: 500px;">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Edit Attendance</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <!-- Add your edit modal content here -->
+                Edit Modal Content
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <!-- Add your Save changes button or other actions here -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="d-flex justify-content-center align-items-center loader-overlay" *ngIf="isLoading">
+    <div class="spinner-border" role="status">
+
+    </div>
+    <span >Loading...</span>
+  </div>
+
+
+  

@@ -3,7 +3,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { GoogleAuthProvider } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Observable, of, switchMap } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, of, switchMap } from 'rxjs';
 import { ToasterService } from '../../toaster.service';
 
 @Injectable({
@@ -11,7 +11,7 @@ import { ToasterService } from '../../toaster.service';
 })
 export class AuthService {
   userData: any;
-    rolebased= new EventEmitter()
+ 
   constructor(
     private fire: AngularFireAuth,
     private router: Router,
@@ -88,17 +88,17 @@ export class AuthService {
           // Add other user data as needed
         })
         .then(() => {
-          console.log('Firestore write successful');
+    
           this.toastrService.showSuccess('Register successfully','Successfull');
         })
         .catch((writeErr: any) => {
-          console.error('Firestore write failed:', writeErr);
+
           this.toastrService.showError('Firestore write failed','Try again');
         });
       }
     })
     .catch((err: any) => {
-      console.error('User registration failed:', err);
+  
       this.toastrService.showError('Please Try Again','Registration Failed');
       this.router.navigateByUrl('/login');
     });
@@ -124,6 +124,16 @@ getUserRole(user:any) {
       console.error('Error getting user data:', error);
     });
     }
+    state:any;
+    rolebased = new Subject<any>();
+
+    rolebased$ = this.rolebased.asObservable();
+    getAttendance(event:any){
+      this.state = event.id;
+      this.rolebased.next(this.state)
+     
+      }
+    
     }
 
   

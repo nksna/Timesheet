@@ -1,14 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, Renderer2, ElementRef, OnInit } from '@angular/core';
 import { DashboardService } from '../dashboard.service';
 import { ToastrService } from 'ngx-toastr';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-
+declare var bootstrap: any;
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit{
   userName: any;
   newdate = new Date();
   userData: any;
@@ -32,10 +32,15 @@ export class DashboardComponent {
   dropdown: boolean[] = [];
   name:any;
 
+  viewModalOpen: boolean = false;
+  editModalOpen: boolean = false;
+  days: number[] = Array.from({ length: 30 }, (_, i) => i + 1);
   constructor(
     private dashboardservice: DashboardService,
     private toastrService: ToastrService,
-    private firestore: AngularFirestore
+    private firestore: AngularFirestore,
+    private el: ElementRef, 
+    private renderer: Renderer2
   ) { }
   initializeStateFromFirestore(userId?: string) {
     this.firestore
@@ -80,6 +85,19 @@ export class DashboardComponent {
           }
         );
     }
+
+    this.renderer.listen('document', 'click', (event) => {
+      const isClickInsideViewModal = this.el.nativeElement.querySelector('#viewModal').contains(event.target);
+      const isClickInsideEditModal = this.el.nativeElement.querySelector('#editModal').contains(event.target);
+      const isClickInsideTriggerButton = event.target.classList.contains('bi-three-dots-vertical');
+
+      if (!isClickInsideViewModal && !isClickInsideEditModal && !isClickInsideTriggerButton) {
+        this.closeAllDropdowns();
+        this.closeViewModal();
+        this.closeEditModal();
+      }
+    });
+   
   }
 
   logout() {
@@ -225,19 +243,39 @@ export class DashboardComponent {
   }
 
   viewAttendance() {
-    // Set the details for the modal
-    alert("dghg");
-   
+    this.viewModalOpen = true;
+    const viewModal = new bootstrap.Modal(document.getElementById('viewModal'), {
+      backdrop: 'static',
+    });
+
+    viewModal.show();
   }
 
   editAttendance() {
-    // Set the details for the modal
-    
-    alert("dghg");
+    this.editModalOpen = true;
+    const editModal = new bootstrap.Modal(document.getElementById('editModal'), {
+      backdrop: 'static', 
+    });
+
+    editModal.show();
   }
 
-  clickonview(index: number) {
+  clickOnView(index: number) {
     this.dropdown[index] = !this.dropdown[index];
   }
+
+  closeViewModal(): void {
+    this.viewModalOpen = false;
+  }
+
+  closeEditModal(): void {
+    this.editModalOpen = false;
+  }
+
+  private closeAllDropdowns(): void {
+    // Close the dropdown for all rows
+    this.dropdown.fill(false);
+  }
+  
   
 }
