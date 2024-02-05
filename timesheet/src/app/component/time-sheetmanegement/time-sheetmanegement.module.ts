@@ -4,6 +4,8 @@ import { TimesheetComponent } from './timesheet/timesheet.component';
 import { TimeSheetmanegementRoutingModule } from './timesheet/time-sheetmanegement-routing.module';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { FormsModule } from '@angular/forms';
+import { AuthService } from '../../Auth/auth/auth.service';
+import { TimesheetmanagementService } from './timesheet/timesheetmanagement.service';
 
 @NgModule({
   declarations: [
@@ -14,6 +16,7 @@ import { FormsModule } from '@angular/forms';
     TimeSheetmanegementRoutingModule,
     FullCalendarModule,FormsModule
 
-  ]
+  ],
+  providers:[AuthService]
 })
 export class TimeSheetmanegementModule { }
