@@ -1,31 +1,34 @@
-<nav class="navbar-default navbar-inverse" role="navigation">
-  <div class="sidebar-sticky">
-    <button class="navbar-toggler d-md-none" type="button" (click)="toggleSidenav()">
-      <span class="navbar-toggler-icon"></span>
-    </button>
 
-    <ul class="nav flex-column" *ngIf="isSidenavCollapsed">
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/Layout/dashboard">Dashboard</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/Layout/employeedetail">Employee Portal</a>
-      </li>
-      <li class="nav-item" *ngIf="userRole.role === 'admin'">
-        <a class="nav-link" routerLink="/Layout/addnewuser">Addnewuser</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/Layout/attendance">Attendance</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/hh">Leave</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/Layout/timesheet">Timesheet Management</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Any Queries</a>
-      </li>
-    </ul>
-  </div>
-</nav>
+<mat-nav-list class="navbar-list1">
+  <a  routerLink="/Layout/dashboard" class="navbar-link1" routerLinkActive="active">
+    <mat-icon class="navbar-icon">dashboard</mat-icon>
+    <span>Dashboard</span>
+    <mat-icon class="arrow-icon">keyboard_arrow_right</mat-icon>
+  </a>
+  <a  routerLink="/Layout/employeedetail" class="navbar-link1" routerLinkActive="active">
+    <mat-icon class="navbar-icon">people</mat-icon>
+    <span>Employee Portal</span>
+    <mat-icon class="arrow-icon">keyboard_arrow_right</mat-icon>
+  </a>
+  <a *ngIf="userRole.role === 'admin'"  routerLink="/Layout/addnewuser" class="navbar-link1" routerLinkActive="active">
+    <mat-icon class="navbar-icon">person_add</mat-icon>
+    <span>Add New User</span>
+    <mat-icon class="arrow-icon">keyboard_arrow_right</mat-icon>
+  </a>
+  <a routerLink="/Layout/attendance" class="navbar-link1" routerLinkActive="active">
+    <mat-icon class="navbar-icon">date_range</mat-icon>
+    <span>Attendance</span>
+    <mat-icon class="arrow-icon">keyboard_arrow_right</mat-icon>
+  </a>
+  <a  routerLink="/Layout/timesheet" class="navbar-link1" routerLinkActive="active">
+    <mat-icon class="navbar-icon">schedule</mat-icon>
+    <span>Timesheet Management</span>
+    <mat-icon class="arrow-icon">keyboard_arrow_right</mat-icon>
+  </a>
+  <a routerLink="/Layout/Interview" class="navbar-link1" routerLinkActive="active">
+    <mat-icon class="navbar-icon">record_voice_over</mat-icon>
+    <span>Interview Management</span>
+    <mat-icon class="arrow-icon">keyboard_arrow_right</mat-icon>
+  </a>
+  <!-- Add other links here -->
+</mat-nav-list>

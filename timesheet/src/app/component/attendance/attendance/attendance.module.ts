@@ -7,7 +7,7 @@ import { AuthService } from '../../../Auth/auth/auth.service';
 
 @NgModule({
   declarations: [AttendanceComponent],
-  imports: [CommonModule, AttendanceRoutingModule, FullCalendarModule],
+  imports: [CommonModule, AttendanceRoutingModule, FullCalendarModule,],
   providers:[AuthService]
 })
 export class AttendanceModule {}

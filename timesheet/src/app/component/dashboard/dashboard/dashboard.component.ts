@@ -10,6 +10,8 @@ declare var bootstrap: any;
 })
 export class DashboardComponent implements OnInit{
   userName: any;
+  selected: Date | null = new Date()
+  showSider:boolean = true
   newdate = new Date();
   userData: any;
   startTimeString: string = '';
@@ -177,6 +179,8 @@ export class DashboardComponent implements OnInit{
   }
   starttimemoring() {
     this.initializeStateFromFirestore()
+    let updateDate = new Date();
+    let formattedDate = `${updateDate.getFullYear()}-${(updateDate.getMonth() + 1).toString().padStart(2, '0')}-${updateDate.getDate().toString().padStart(2, '0')}`;
     const user = {
       userid: this.userid.uid,
       StartTime: this.startTimeString,
@@ -186,7 +190,9 @@ export class DashboardComponent implements OnInit{
       )}:${this.formatTimeComponent(
         this.minutes % 60
       )}:${this.formatTimeComponent(this.seconds % 60)}`,
-      updateDate: new Date(),
+  
+     updateDate : formattedDate,
+     
       status:'Pending',
     };
     this.dashboardservice.StartTime(this.userid.uid, user,this.name.employeename);

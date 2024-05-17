@@ -45,6 +45,13 @@ const routes: Routes = [
           import('./component/attendance/attendance/attendance.module').then(
             (m) => m.AttendanceModule
           )
+      },
+      {
+        path: 'Interview',
+        loadChildren: () =>
+          import('./component/manegement/manegement/manegement.module').then(
+            (m) => m.ManegementModule
+          )
       }
       // { path: 'uikit', loadChildren: () => import('').then(m => m.EmployeedetailModule) },
       // { path: 'utilities', loadChildren: () => import('./demo/components/utilities/utilities.module').then(m => m.UtilitiesModule) },

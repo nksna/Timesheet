@@ -2,20 +2,29 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { ToasterService } from '../../../toaster.service';
+
 declare var bootstrap: any;
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrl: './header.component.css',
+  styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent {
-  @Output() toggleSidenav = new EventEmitter<void>();
+  
   
   constructor(private fire: AngularFireAuth, private router: Router,private toaster:ToasterService) {}
 
-  toggleSidenav1() {
+  @Output() toggleSidenav: EventEmitter<void> = new EventEmitter<void>();
+
+
+
+  // Method to emit event when toggle button is clicked
+  toggleSidenav1(): void {
     this.toggleSidenav.emit();
   }
+
+  // Method to handle logout
+  
 
   logoutmodal() {
     this.fire.signOut().then(

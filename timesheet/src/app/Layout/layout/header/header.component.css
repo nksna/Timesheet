@@ -1,0 +1,32 @@
+/* header.component.css */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+  }
+  
+  .header-title {
+    flex-grow: 1;
+    text-align: center;
+  }
+  
+  /* layout.component.css */
+  .sidenav-container {
+    height: 100%;
+  }
+  
+  .content {
+    padding: 20px;
+  }
+  /* header.component.css */
+
+.header {
+    background-color: #333; /* Example background color */
+    color: #fff; /* Example text color */
+  }
+  
+  .header-button {
+    color: #fff; /* Example color for button icon */
+  }
+  

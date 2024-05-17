@@ -4,7 +4,8 @@ import { Router } from '@angular/router';
 import { GoogleAuthProvider } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { BehaviorSubject, Observable, Subject, of, switchMap } from 'rxjs';
-import { ToasterService } from '../../toaster.service';
+
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +17,7 @@ export class AuthService {
     private fire: AngularFireAuth,
     private router: Router,
     private firestore: AngularFirestore,
-   private toastrService:ToasterService
+   private toastrService:ToastrService
    
   ) {}
   ngOninit(){}
@@ -29,13 +30,13 @@ export class AuthService {
          
           this.router.navigateByUrl('/Layout/dashboard');
           // this.getUserRole(res.user)
-          this.toastrService.showSuccess('Login successfully', 'Welcome');
+          this.toastrService.success('Login successfully', 'Welcome');
         }
        
        
       },
       (err: any) => {
-        this.toastrService.showError('Login Failed','Retry');
+        this.toastrService.error('Login Failed','Retry');
         this.router.navigateByUrl('/login');
       }
     );
@@ -44,10 +45,10 @@ export class AuthService {
   Resetpassword(Email: any) {
     this.fire.sendPasswordResetEmail(Email).then(
       () => {
-        this.toastrService.showSuccess('code Successfully send','Successfull');
+        this.toastrService.success('code Successfully send','Successfull');
       },
       (err: any) => {
-        this.toastrService.showError('code not send','Retry');
+        this.toastrService.error('code not send','Retry');
       }
     );
   }
@@ -59,13 +60,13 @@ export class AuthService {
         if (res) {
           console.log(res.email, res, 'res');
           localStorage.setItem('token', res.user);
-          this.toastrService.showSuccess('Registration successful','Successfull');
+          this.toastrService.success('Registration successful','Successfull');
 
           this.router.navigateByUrl('/Layout');
         }
       })
       .catch((err: any) => {
-        this.toastrService.showError('Registration Failed','Retry');
+        this.toastrService.error('Registration Failed','Retry');
         this.router.navigateByUrl('/register');
       });
   }
@@ -89,17 +90,17 @@ export class AuthService {
         })
         .then(() => {
     
-          this.toastrService.showSuccess('Register successfully','Successfull');
+          this.toastrService.success('Register successfully','Successfull');
         })
         .catch((writeErr: any) => {
 
-          this.toastrService.showError('Firestore write failed','Try again');
+          this.toastrService.error('Firestore write failed',writeErr);
         });
       }
     })
     .catch((err: any) => {
   
-      this.toastrService.showError('Please Try Again','Registration Failed');
+      this.toastrService.error('Please Try Again','Registration Failed');
       this.router.navigateByUrl('/login');
     });
 }
@@ -125,16 +126,22 @@ getUserRole(user:any) {
     });
     }
     state:any;
-    rolebased = new Subject<any>();
+  private  rolebased = new BehaviorSubject<any>(null);
 
     rolebased$ = this.rolebased.asObservable();
-    getAttendance(event:any){
-      this.state = event.id;
-      this.rolebased.next(this.state)
-     
-      }
+  
+
+
+  getAttendance(data: any) {
+    this.rolebased.next(data);
+  }
+
+  getSharedData(): Observable<any> {
+    return this.rolebased$;
+  }
+}
     
-    }
+
 
   
 

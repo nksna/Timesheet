@@ -1,37 +1,9 @@
-<header class="navbar navbar-dark bg-dark">
-  <div class="container">
-    <button class="navbar-toggler" type="button" (click)="toggleSidenav1()">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <h1 class="navbar-brand">Debugiz</h1>
-    <div style="display: flex; padding: 5px">
-      <div class="navbar-nav" style="padding-left: 10px">
-        <span class="nav-item nav-link"
-          ><i class="bi bi-person-circle"></i>
-        </span>
-      </div>
-      <div class="navbar-nav" style="padding-left: 10px" (click)="logout()">
-        <span class="nav-item nav-link"><i class="bi bi-box-arrow-right"></i> Logout</span>
-      </div>
-    </div>
-  </div>
+<header class="header">
+  <button mat-icon-button (click)="toggleSidenav1()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span class="header-title">Talenttreker</span>
+  <button mat-icon-button (click)="logout()">
+    <mat-icon>exit_to_app</mat-icon>
+  </button>
 </header>
-
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" style="max-width: 500px;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Logout Confirmation</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <p>Are you sure you want to logout?</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary"  data-bs-dismiss="modal" (click)="logoutmodal()">Confirm</button>
-      </div>
-    </div>
-  </div>
-</div>
-

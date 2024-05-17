@@ -16,7 +16,7 @@ export class TimesheetComponent implements OnInit {
   attendanceData: any;
   isLoading: boolean=false;
 
-  constructor(private firestore: AngularFirestore,private toastr:ToastrService,private auth:AuthService) { }
+  constructor(private firestore: AngularFirestore,private toastr:ToastrService,private auth:AuthService,private Timesheet:TimesheetmanagementService) { }
 
   ngOnInit(): void {
     this.getAllUsersData()
@@ -113,7 +113,8 @@ export class TimesheetComponent implements OnInit {
  getdata(attendanceId:any){
   
     
-    this.auth.getAttendance(attendanceId)
+  const attandance = "present"
+  this.presentorabsent(attendanceId)
  }
   approveAttendance(attendanceId: any) {
     this.auth.getAttendance(attendanceId);
@@ -192,5 +193,14 @@ export class TimesheetComponent implements OnInit {
       this.sortField = field;
       this.sortDirection = 'asc';
     }
+  }
+  presentorabsent(date:any){
+const attandance ={
+  title:"present" ,
+  start:date.data.startTime.updateDate,
+ 
+  
+}
+    this.Timesheet.presentorabsent(date.data.startTime.userid,attandance)
   }
 }

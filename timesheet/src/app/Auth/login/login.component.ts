@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
-import { ToasterService } from '../../toaster.service';
+
 import { FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -13,8 +14,8 @@ export class LoginComponent {
   showEyeicon:boolean=false;
   forgetpassword:boolean=false;
   logforforgetpass:boolean=true;
-  
-  constructor(private authservice: AuthService, private router: Router, private toastrService:ToasterService) {
+  intervalId:any;
+  constructor(private authservice: AuthService, private router: Router, private toastrService:ToastrService) {
     this.loginform = new FormGroup({
       "email":new FormControl('',Validators.required),
       "password":new FormControl('')
@@ -35,16 +36,16 @@ export class LoginComponent {
   Loginform() {
     const data =this.loginform.value
     if (data.email == '') {
-      this.toastrService.showError('please enter email','Enter Mail');
+      this.toastrService.error('please enter email','Enter Mail');
     }
     if (data.password == '') {
-      this.toastrService.showError('please enter password','Enter Password');
+      this.toastrService.error('please enter password','Enter Password');
     }
     let payload = {
       email: data.email,
       password: data.password,
     };
-    this.authservice.login(payload);
+    this.authservice.login(payload)
    this.loginform.reset()
   }
   register() {
@@ -52,9 +53,11 @@ export class LoginComponent {
   }
   Send() {
     if (this.emailforgat == '') {
-      this.toastrService.showError('enter email to continue','Enter Mail');
+      this.toastrService.error('enter email to continue','Enter Mail');
+    }else{
+      this.authservice.Resetpassword(this.emailforgat);
     }
-    this.authservice.Resetpassword(this.emailforgat);
+   
   }
   openQtyModel1() {
     const model = document.getElementById('myModal1');
@@ -80,7 +83,7 @@ export class LoginComponent {
     this.authservice.Loginwithgoogle();
   }
   startImageSlider() {
-    setInterval(() => {
+   this.intervalId= setInterval(() => {
       this.currentImageIndex = (this.currentImageIndex + 1) % this.images.length;
     }, 5000);
   }
@@ -106,5 +109,8 @@ export class LoginComponent {
 
   onEyeicon(){
     this.showEyeicon = !this.showEyeicon;
+  }
+  ngOnDestroy(): void {
+    clearInterval(this.intervalId);
   }
 }

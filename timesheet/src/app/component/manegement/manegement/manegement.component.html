@@ -1,1 +1,56 @@
-<p>manegement works!</p>
+
+<!-- company-form.component.html -->
+<form class="form-container" (ngSubmit)="submitForm()">
+    <mat-form-field class="form-field">
+      <input matInput placeholder="Company Name" [(ngModel)]="companyName" name="companyName">
+    </mat-form-field>
+    <mat-form-field class="form-field">
+      <input matInput placeholder="Company HR" [(ngModel)]="companyHR" name="companyHR">
+    </mat-form-field>
+    <mat-form-field class="form-field">
+      <input matInput placeholder="HR Contact Detail" [(ngModel)]="hrContact" name="hrContact">
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="submitForm()">Primary</button>
+    
+  </form>
+  
+  <!-- company-list.component.html -->
+  <!-- company-list.component.html -->
+<table mat-table [dataSource]="companies" class="mat-elevation-z8" style="border: 1px solid #ccc;">
+  <!-- Company Name Column -->
+  <ng-container matColumnDef="companyName">
+    <th mat-header-cell *matHeaderCellDef> Company Name </th>
+    <td mat-cell *matCellDef="let company"> {{ company.companyName }} </td>
+  </ng-container>
+
+  <!-- Company HR Column -->
+  <ng-container matColumnDef="companyHR">
+    <th mat-header-cell *matHeaderCellDef> Company HR </th>
+    <td mat-cell *matCellDef="let company"> {{ company.companyHR }} </td>
+  </ng-container>
+
+  <!-- HR Contact Detail Column -->
+  <ng-container matColumnDef="hrContact">
+    <th mat-header-cell *matHeaderCellDef> HR Contact Detail </th>
+    <td mat-cell *matCellDef="let company"> {{ company.hrContact }} </td>
+  </ng-container>
+
+  <!-- Edit and Delete Column -->
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef> Actions </th>
+    <td mat-cell *matCellDef="let company">
+      <button mat-icon-button color="primary" (click)="editCompany(company.id)">
+        <mat-icon aria-label="Edit">edit</mat-icon>
+      </button>
+      <button mat-icon-button color="warn" (click)="deleteUser(company.id)">
+        <mat-icon aria-label="Delete">delete</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <!-- Header Rows -->
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+
+  <!-- Data Rows -->
+  <tr mat-row *matRowDef="let company; columns: displayedColumns;"></tr>
+</table>

@@ -1,4 +1,7 @@
 @import 'ngx-toastr/toastr';
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
+
+
  .attendance-container {
     max-width: 1200px;
     margin: 0 auto;
@@ -220,3 +223,7 @@ button:hover {
   left: 15px; 
   top: 50px; 
 } 
+
+
+
+

@@ -3,7 +3,7 @@
     <div class="header bg-light p-3">
       <div class="left">
         <div class="date">{{newdate | date:'MMM d, y'}}</div>
-        <div class="welcome">Welcome, {{ userName }}</div>
+        <div class="welcome">Welcome, {{ name.employeename }}</div>
       </div>
       <div class="right">
         <div *ngIf="startTimeString && !stopTimeString">
@@ -13,8 +13,40 @@
         
       </div>
     </div>
-    <div class="content mt-3">
-      <!-- Additional content goes here -->
+    <div class="w-100">
+      <div class="dashboard text-black p-3 w-100">
+          <div class="row">
+              <div style="height: 180px;" class="col-8 bg-danger rounded shadow">
+                 <div class="d-flex align-items-center" style="height: 170px;"> <h3><button  class="btn"><i class="fa-solid fa-bars" ></i></button>WELCOME ADMIN</h3></div>
+                 <div class="row pt-4">
+                  <div class="col-4 shadow m-2">
+                      <h2>calender</h2>
+                      <mat-card class="demo-inline-calendar-card">
+                          <mat-calendar [(selected)]="selected"></mat-calendar>
+                        </mat-card>
+                  </div>
+                  <div class="col-4 shadow m-2">
+                      
+                  </div>
+                 </div>
+              </div>
+              <div class="col-4">
+                  <div style="height: 400px;" class="edit-admin border rounded shadow p-2">
+                      <ol  >
+                          <li>user</li>
+                      </ol>
+                  </div>
+                  <div class="mt-2 border rounded shadow p-2 bg-dark text-light d-flex align-items-center justify-content-center">
+                      <h2 class="fw-bolder"><i class="fa-solid fa-users me-2"></i><a >Employee : 12</a></h2>
+                  </div>
+              </div>
+
+
+          </div>
+      </div>
+  </div>
+    <!-- <div class="content mt-3">
+      
       <div class="card">
         <div class="card-body">
           <div class="table-responsive">
@@ -40,7 +72,7 @@
                   <td>{{ x.startTime.StartTime }}</td>
                   <td>{{ x.startTime.StopTime }}</td>
                   <td>{{ x.startTime.totalhours }}</td>
-                  <td>{{ x.startTime.updateDate.toDate() | date: 'yyyy-MM-dd' }}</td>
+                  <td>{{ x.startTime.updateDate }}</td>
                   <td [ngClass]="statusCode(x.startTime.status)">{{ x.startTime.status }}</td>
                   <td>{{ x.startTime.updateby ? x.startTime.updateby : 'Pending' }}</td>
                   <td>
@@ -63,7 +95,7 @@
 
     
         
-        <!-- View Modal -->
+        
         <div class="modal" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="viewModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered" style="max-width: 500px;">
             <div class="modal-content">
@@ -72,7 +104,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                <!-- Add your view modal content here -->
+                
                 View Modal Content
               </div>
               <div class="modal-footer">
@@ -82,7 +114,7 @@
           </div>
         </div>
         
-        <!-- Edit Modal -->
+        
         <div class="modal" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered" style="max-width: 500px;">
             <div class="modal-content">
@@ -91,18 +123,18 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                <!-- Add your edit modal content here -->
+               
                 Edit Modal Content
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <!-- Add your Save changes button or other actions here -->
+                
               </div>
             </div>
           </div>
         </div>
     
-  </div>
+  </div> -->
 
   <div class="d-flex justify-content-center align-items-center loader-overlay" *ngIf="isLoading">
     <div class="spinner-border" role="status">

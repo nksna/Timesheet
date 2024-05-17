@@ -1,30 +1,61 @@
-nav, .sidebar-sticky {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 48px;
-  min-height: 85vh;
-  background-color: #010a14;
-  /* padding: 10px; */
-  /* border-right: 1px solid #ddd; */
-  color: #ddd; 
+/* sidenav.component.css */
+
+.sidenav-container1 {
+  background-color: #333; /* Example background color */
+  color: #fff; /* Example text color */
 }
 
-.nav-link {
-  padding: 10px;
+.sidenav-link1 {
+  color: #181515; /* Example color for navigation links */
+}
+/* navbar.component.css */
+
+
+
+
+
+
+/* navbar.component.css */
+.navbar-list1 {
+  padding: 0;
+ 
 }
 
-.collapse {
-  
-  width: 200px;
+.navbar-link1 {
+  display: flex;
+  align-items: center;
+  padding: 15px 20px;
+  margin-bottom: 10px;
+  color: #889de1;
+  text-decoration: none;
+  transition: background-color 0.3s;
+  font-family: 'Arial', sans-serif; /* Change font family */
+  background-color: #333; /* Change background color */
 }
-.nav-link {
-  color: aliceblue;
+
+.navbar-link1:hover {
+  background-color: #64686a;
 }
-@media only screen and (max-width: 300px) {
-  .collapsed {
-    width: 50%;
-    padding: 10px;
-    overflow-y: auto;
+
+.navbar-icon {
+  margin-right: 10px;
+}
+
+@media (max-width: 768px) {
+  .navbar-link {
+    padding: 15px;
   }
   
+}
+
+.active {
+  border-right: 20px solid aqua; /* Example highlighting style */
+  background-color: aqua;
+  border-radius:20px ;
+}
+.arrow-icon {
+  margin-left: auto; /* Move the arrow to the right side */
+}
+::ng-deep .mat-drawer-side{
+  border-right-style:none
 }

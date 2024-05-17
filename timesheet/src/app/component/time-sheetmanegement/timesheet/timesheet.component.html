@@ -30,11 +30,11 @@
         <tr *ngFor="let x of attendance; let i = index">
           <!-- Use filteredAttendance instead of attendance in ngFor -->
           <td>{{i + 1}}</td>
-          <td>{{x.data.startTime.userid}}</td>
+          <td>{{x.data.name}}</td>
           <td>{{x.data.startTime.StartTime}}</td>
           <td>{{x.data.startTime.StopTime}}</td>
           <td>{{x.data.startTime.totalhours}}</td>
-          <td>{{x.data.startTime.updateDate.toDate() | date: 'yyyy-MM-dd'}}</td>
+          <td>{{x.data.startTime.updateDate}}</td>
           <td [ngClass]="statusCode(x.data.startTime.status)">
             <ul><li>{{x.data.startTime.status}}</li></ul>
           </td>

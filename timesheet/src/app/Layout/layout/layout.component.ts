@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-layout',
@@ -6,9 +7,17 @@ import { Component } from '@angular/core';
   styleUrl: './layout.component.css'
 })
 export class LayoutComponent {
-  isSidenavCollapsed = false;
+  @ViewChild('sidenav')
+  sidenav!: MatSidenav;
+  isSidenavCollapsed: boolean = true; 
 
-  toggleSidenav() {
-    this.isSidenavCollapsed = !this.isSidenavCollapsed;
-  }
+// Method to toggle the sidenav
+toggleSidenav() {
+  this.sidenav.toggle();
+}
+
+// Method to handle sidenav state change
+onSidenavToggle(opened: boolean) {
+  this.isSidenavCollapsed = !opened; // Update the isSidenavCollapsed property
+}
 }

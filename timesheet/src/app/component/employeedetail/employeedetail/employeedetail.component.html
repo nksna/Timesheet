@@ -1,4 +1,4 @@
-<div class="container mt-5">
+<!-- <!-- <div class="container mt-5">
     <div class="row">
       <div class="col-md-4">
         <img src="path/to/profile-photo.jpg" alt="Profile Photo" class="img-fluid rounded-circle mb-3">
@@ -24,13 +24,12 @@
     <div class="modal-dialog">
       <div class="modal-content">
   
-        <!-- Modal Header -->
         <div class="modal-header">
           <h4 class="modal-title">Update Profile</h4>
           <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="closeQtyModel()"></button>
         </div>
   
-        <!-- Modal body -->
+      
         <div class="modal-body">
           <label>Enter Name</label>
           <input type="text" placeholder="Enter name" class="form-control" [(ngModel)]="name" >
@@ -67,11 +66,139 @@
           
         </div>
   
-        <!-- Modal footer -->
+       
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="updateprofile()" [(ngModel)]="age">Update</button>
         </div>
   
       </div>
     </div>
+  </div> -->
+  <!-- <div class="profile-page d-flex flex-column">
+    <header class="header">
+      <span class="header-title">Employee profile</span>
+      <div class="header-container">
+        <mat-icon aria-hidden="false" aria-label="Example home icon">person</mat-icon>
+        <span>Hi {{  userData.employeename }}</span>
+        <button type="button" class="btn btn-primary" >Logout</button>
+      </div>
+    </header>
+    <div class="overlay" *ngIf="isLoading">
+      <div class="spinner-wrapper">
+        <div class="spinner-border text-primary" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+    </div>
+    
+    <form class="example-form" [formGroup]="form">
+      <h2>PROFILE</h2>
+      <table class="example-full-width" cellspacing="0">
+        <tr>
+          <td>
+            <mat-form-field class="example-full-width">
+              <mat-label>Name</mat-label>
+              <input matInput formControlName="name" />
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+              <mat-label>Email</mat-label>
+              <input matInput formControlName="email" type="email" />
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+              <mat-label>Phone</mat-label>
+              <span matPrefix>+1 &nbsp;</span>
+              <input type="tel" matInput placeholder="555-555-1234" formControlName="phone" />
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+              <mat-label>Current Address</mat-label>
+              <textarea matInput placeholder="Ex. 100 Main St" formControlName="currentaddress"></textarea>
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+              <mat-label>Previous Address</mat-label>
+              <textarea matInput placeholder="Ex. 100 Main St" formControlName="previousaddress"></textarea>
+            </mat-form-field>
+          </td>
+        </tr>
+      </table>
+    
+      <div class="col-xs-3">
+        <button type="button" class="btn btn-success"  [disabled]="!isProfileEmpty || isLoading">
+          <span
+            class="spinner-border spinner-border-sm"
+            role="status"
+            aria-hidden="true"
+            *ngIf="isLoading && apiAction === 'create'"
+          ></span>
+          CREATE
+        </button>
+        <button type="button" class="btn btn-primary"  [disabled]="isProfileEmpty || isLoading">
+          <span
+            class="spinner-border spinner-border-sm"
+            role="status"
+            aria-hidden="true"
+            *ngIf="isLoading && apiAction === 'update'"
+          ></span>
+          UPDATE
+        </button>
+        <button type="button" class="btn btn-danger"  [disabled]="isProfileEmpty || isLoading">
+          <span
+            class="spinner-border spinner-border-sm"
+            role="status"
+            aria-hidden="true"
+            *ngIf="isLoading && apiAction === 'delete'"
+          ></span>
+          DELETE
+        </button>
+      </div>
+    </form>
   </div>
+   --> 
+   <div class="w-100">
+    <div class="dashboard text-black p-3 w-100">
+        <div class="d-flex justify-content-between"><h1>Welcome User</h1> 
+        <button class="btn btn-primary" routerLink="add">Add</button>
+        </div>
+        <div class="w-75 d-flex justify-content-between">
+         <div> <input type="text" [(ngModel)]="searchKey" class="form-control" placeholder="Search details"></div>
+        <div>
+           <button class="btn btn-secondary" mat-button [matMenuTriggerFor]="menu">Sort</button>
+           <mat-menu #menu="matMenu">
+             <button (click)="sortById()" mat-menu-item>By User Id</button>
+             <button (click)="sortBYname()" mat-menu-item>By User Name</button>
+           </mat-menu>
+        </div>
+        <div>
+          <button (click)="generatePDF()" class="btn btn-success">Export</button>
+        </div>
+        </div>
+        <div>
+            <table class="table border shadow mt-4">
+                <thead>
+                  <tr>
+                    <th scope="col">User Id</th>
+                    <th scope="col">User</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">User Status</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let user of allUsers | search : searchKey | paginate: {itemsPerPage:5,currentPage:page} " [hidden]="user.id=='1'">
+                    <td>{{user.id}}</td>
+                    <td>{{user.name}}</td>
+                    <td>{{user.email}}</td>
+                    <td><span [ngClass]="user.active=='1'?'btn btn-success':'btn btn-warning'">{{user.active=="1"?"Active":"InActive"}}</span></td>
+                    <td>
+                        <a routerLink="edit/{{user.id}}"><i class="fa-solid fa-pen text-success me-2 btn"></i></a>
+                        <i class="fa-solid fa-trash text-danger btn" (click)="removeUser(user.id)"></i>
+                    </td>
+                  </tr>
+                  <tr *ngIf="(allUsers|search:searchKey).length===0">
+                    <p class="fw-bolder text-danger">User dose not exist!!!</p>
+                    </tr>
+                </tbody>
+              </table>
+              <pagination-controls (pageChange)="page = $event"></pagination-controls>
+        </div>
+    </div>
+</div>
