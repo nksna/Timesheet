@@ -3,6 +3,7 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/comp
 import { Observable } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { map } from 'rxjs/operators';
+import { ManagementService } from './management.service';
 interface Company {
   companyName: string;
   companyHR: string;
@@ -17,10 +18,10 @@ export class ManegementComponent {
   companyName: any="";
   companyHR: any ="";
   hrContact: any ="";
- 
+  serach:any;
   companies:any =[]
   displayedColumns: string[] = ['companyName', 'companyHR', 'hrContact','actions'];
-  constructor(private firestore: AngularFirestore,private toastr:ToastrService) {
+  constructor(private firestore: AngularFirestore,private toastr:ToastrService,private service:ManagementService) {
     this.getAllCompaniesData()
   }
   getAllCompaniesData() {
@@ -37,34 +38,17 @@ export class ManegementComponent {
     });
   }
   submitForm() {
-    if (this.companyName.trim() === "" || this.companyHR.trim() === "" || this.hrContact.trim() === "") {
+    console.count('test')
+    if (this.companyName.trim() === "" && this.companyHR.trim() === "" && this.hrContact.trim() === "") {
       alert("Please fill in all fields.");
-      return;
-    }
-  
-    const duplicateCompany = this.companies.find((company:any) => 
-      company.companyName.toLowerCase() === this.companyName.toLowerCase() &&
-      company.companyHR.toLowerCase() === this.companyHR.toLowerCase() &&
-      company.hrContact.toLowerCase() === this.hrContact.toLowerCase()
-    );
-  
-    if (duplicateCompany) {
-      alert("Duplicate company detected.");
-      return;
-    }
-  
-    this.firestore.collection('companies').add({
-      companyName: this.companyName,
-      companyHR: this.companyHR,
-      hrContact: this.hrContact
-    }).then(() => {
-      console.log('Company added successfully!');
-      this.companyName = '';
-      this.companyHR = '';
-      this.hrContact = '';
-    }).catch((error) => {
-      console.error('Error adding company: ', error);
-    });
+
+    }else{
+    this.service.Postmanagement(this.companyName,this.companyHR,this.hrContact)
+    this.companyName ="";
+    this.companyHR ="";
+    this.hrContact =""
+    
+   }
   }
   
   deleteUser(userId: string) {

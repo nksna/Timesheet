@@ -7,12 +7,15 @@ import { MatButtonModule } from '@angular/material/button';
 import { ManagementRoutingModule } from './management-routing.module';
 import { FormsModule } from '@angular/forms';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
+import { ManagementService } from './management.service';
+import { ManagementPipe } from './management.pipe';
 
 
 
 @NgModule({
   declarations: [
-    ManegementComponent
+    ManegementComponent,
+    ManagementPipe
   ],
   imports: [
     CommonModule, ManagementRoutingModule, MatTableModule,
@@ -20,6 +23,7 @@ import { MatIcon, MatIconModule } from '@angular/material/icon';
     MatButtonModule,
     MatIconModule,
     FormsModule
-  ]
+  ],
+  providers:[ManagementService]
 })
 export class ManegementModule { }

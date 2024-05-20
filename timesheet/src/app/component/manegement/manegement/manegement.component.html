@@ -2,36 +2,39 @@
 <!-- company-form.component.html -->
 <form class="form-container" (ngSubmit)="submitForm()">
     <mat-form-field class="form-field">
-      <input matInput placeholder="Company Name" [(ngModel)]="companyName" name="companyName">
+      <input matInput placeholder="Topic Name" [(ngModel)]="companyName" name="companyName">
     </mat-form-field>
     <mat-form-field class="form-field">
-      <input matInput placeholder="Company HR" [(ngModel)]="companyHR" name="companyHR">
+      <input matInput placeholder="DEfination" [(ngModel)]="companyHR" name="companyHR">
     </mat-form-field>
     <mat-form-field class="form-field">
-      <input matInput placeholder="HR Contact Detail" [(ngModel)]="hrContact" name="hrContact">
+      <input matInput placeholder="course" [(ngModel)]="hrContact" name="hrContact">
     </mat-form-field>
-    <button mat-raised-button color="primary" (click)="submitForm()">Primary</button>
+    <button mat-raised-button color="primary">Primary</button>
     
   </form>
+  <mat-form-field class="form-field">
+    <input matInput placeholder=" search Topic Name" [(ngModel)]="serach" name="serach">
+  </mat-form-field>
   
   <!-- company-list.component.html -->
   <!-- company-list.component.html -->
-<table mat-table [dataSource]="companies" class="mat-elevation-z8" style="border: 1px solid #ccc;">
+<table mat-table [dataSource]="companies | management:serach" class="mat-elevation-z8" style="border: 1px solid #ccc;">
   <!-- Company Name Column -->
   <ng-container matColumnDef="companyName">
-    <th mat-header-cell *matHeaderCellDef> Company Name </th>
+    <th mat-header-cell *matHeaderCellDef> Topic name </th>
     <td mat-cell *matCellDef="let company"> {{ company.companyName }} </td>
   </ng-container>
 
   <!-- Company HR Column -->
   <ng-container matColumnDef="companyHR">
-    <th mat-header-cell *matHeaderCellDef> Company HR </th>
+    <th mat-header-cell *matHeaderCellDef> Defination</th>
     <td mat-cell *matCellDef="let company"> {{ company.companyHR }} </td>
   </ng-container>
 
   <!-- HR Contact Detail Column -->
   <ng-container matColumnDef="hrContact">
-    <th mat-header-cell *matHeaderCellDef> HR Contact Detail </th>
+    <th mat-header-cell *matHeaderCellDef> course</th>
     <td mat-cell *matCellDef="let company"> {{ company.hrContact }} </td>
   </ng-container>
 
