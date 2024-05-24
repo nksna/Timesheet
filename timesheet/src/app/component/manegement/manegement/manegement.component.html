@@ -48,14 +48,14 @@
   </ng-container>
 
   <!-- Edit and Delete Column -->
-  <ng-container matColumnDef="actions"  *ngIf="userRole.role === 'admin'">
-    <th mat-header-cell *matHeaderCellDef> Actions </th>
-    <td mat-cell *matCellDef="let company">
+  <ng-container matColumnDef="actions"  >
+    <th mat-header-cell *matHeaderCellDef > Actions </th>
+    <td mat-cell *matCellDef="let company" >
       <button mat-icon-button color="primary" (click)="editCompany(company)">
         <mat-icon aria-label="Edit">edit</mat-icon>
       </button>
       <button mat-icon-button color="warn" (click)="deleteUser(company.id)">
-        <mat-icon aria-label="Delete">delete</mat-icon>
+        <mat-icon aria-label="Delete" *ngIf="userRole.role === 'admin'">delete</mat-icon>
       </button>
     </td>
   </ng-container>
