@@ -5,7 +5,7 @@
     <span>Dashboard</span>
     <mat-icon class="arrow-icon">keyboard_arrow_right</mat-icon>
   </a>
-  <a  routerLink="/Layout/employeedetail" class="navbar-link1" routerLinkActive="active">
+  <a  *ngIf="userRole.role === 'admin'"  routerLink="/Layout/employeedetail" class="navbar-link1" routerLinkActive="active">
     <mat-icon class="navbar-icon">people</mat-icon>
     <span>Employee Portal</span>
     <mat-icon class="arrow-icon">keyboard_arrow_right</mat-icon>
@@ -15,12 +15,12 @@
     <span>Add New User</span>
     <mat-icon class="arrow-icon">keyboard_arrow_right</mat-icon>
   </a>
-  <a routerLink="/Layout/attendance" class="navbar-link1" routerLinkActive="active">
+  <a   *ngIf="userRole.role === 'admin'" routerLink="/Layout/attendance" class="navbar-link1" routerLinkActive="active">
     <mat-icon class="navbar-icon">date_range</mat-icon>
     <span>Attendance</span>
     <mat-icon class="arrow-icon">keyboard_arrow_right</mat-icon>
   </a>
-  <a  routerLink="/Layout/timesheet" class="navbar-link1" routerLinkActive="active">
+  <a  *ngIf="userRole.role === 'admin'" routerLink="/Layout/timesheet" class="navbar-link1" routerLinkActive="active">
     <mat-icon class="navbar-icon">schedule</mat-icon>
     <span>Timesheet Management</span>
     <mat-icon class="arrow-icon">keyboard_arrow_right</mat-icon>

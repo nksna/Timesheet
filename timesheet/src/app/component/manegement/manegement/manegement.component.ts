@@ -29,6 +29,37 @@ export class ManegementComponent {
   constructor(private firestore: AngularFirestore,private toastr:ToastrService,private service:ManagementService,private route:Router) {
     this.getAllCompaniesData()
   }
+  userRole: any;
+  useradminid:any;
+  
+ 
+  ngOnInit() {
+    const dataget = localStorage.getItem('token2');
+    if (dataget != null) {
+      this.useradminid = JSON.parse(dataget);
+    }
+    if (this.useradminid) {
+      this.firestore
+        .collection('users')
+        .doc(this.useradminid.uid)
+        .valueChanges()
+        .subscribe(
+          (data) => {
+            // Handle successful data retrieval
+            if (data) {
+              this.userRole = data;
+              console.log(this.userRole, 'user1');
+            } else {
+              console.log('User not found for userId1');
+            }
+          },
+          (error) => {
+            // Handle errors
+            console.error('Error getting user data:', error);
+          }
+        );
+    }
+  }
   getAllCompaniesData() {
     this.firestore.collection('companies').snapshotChanges().pipe(
       map(actions => {

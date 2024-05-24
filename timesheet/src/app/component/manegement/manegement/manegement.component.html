@@ -1,6 +1,6 @@
 
 <!-- company-form.component.html -->
-<form class="form-container" (ngSubmit)="submitForm()">
+<form class="form-container" (ngSubmit)="submitForm()" *ngIf="userRole.role === 'admin'">
   <mat-form-field class="form-field" appearance="fill"  style="width:75%">
     <mat-label>Topic Name</mat-label>
     <input matInput placeholder="Topic Name" [(ngModel)]="companyName" name="companyName">
