@@ -48,7 +48,7 @@
   </ng-container>
 
   <!-- Edit and Delete Column -->
-  <ng-container matColumnDef="actions">
+  <ng-container matColumnDef="actions"  *ngIf="userRole.role === 'admin'">
     <th mat-header-cell *matHeaderCellDef> Actions </th>
     <td mat-cell *matCellDef="let company">
       <button mat-icon-button color="primary" (click)="editCompany(company)">
