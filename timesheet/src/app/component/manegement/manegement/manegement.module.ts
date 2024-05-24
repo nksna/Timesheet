@@ -9,13 +9,15 @@ import { FormsModule } from '@angular/forms';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { ManagementService } from './management.service';
 import { ManagementPipe } from './management.pipe';
+import { ViewComponent } from './view/view.component';
 
 
 
 @NgModule({
   declarations: [
     ManegementComponent,
-    ManagementPipe
+    ManagementPipe,
+    ViewComponent
   ],
   imports: [
     CommonModule, ManagementRoutingModule, MatTableModule,

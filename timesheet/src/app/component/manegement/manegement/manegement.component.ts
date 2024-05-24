@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { map } from 'rxjs/operators';
 import { ManagementService } from './management.service';
+import { Router } from '@angular/router';
 interface Company {
   companyName: string;
   companyHR: string;
@@ -18,10 +19,14 @@ export class ManegementComponent {
   companyName: any="";
   companyHR: any ="";
   hrContact: any ="";
+  example: any = "";
+  userid:any;
   serach:any;
   companies:any =[]
-  displayedColumns: string[] = ['companyName', 'companyHR', 'hrContact','actions'];
-  constructor(private firestore: AngularFirestore,private toastr:ToastrService,private service:ManagementService) {
+  updatedata:boolean = false;
+  adddata:boolean = true;
+  displayedColumns: string[] = ['companyName', 'companyHR', 'hrContact','actions','View'];
+  constructor(private firestore: AngularFirestore,private toastr:ToastrService,private service:ManagementService,private route:Router) {
     this.getAllCompaniesData()
   }
   getAllCompaniesData() {
@@ -39,11 +44,11 @@ export class ManegementComponent {
   }
   submitForm() {
     console.count('test')
-    if (this.companyName.trim() === "" && this.companyHR.trim() === "" && this.hrContact.trim() === "") {
+    if (this.companyName === "" && this.companyHR === "" && this.hrContact === "") {
       alert("Please fill in all fields.");
 
     }else{
-    this.service.Postmanagement(this.companyName,this.companyHR,this.hrContact)
+    this.service.Postmanagement(this.companyName,this.companyHR,this.hrContact,this.example)
     this.companyName ="";
     this.companyHR ="";
     this.hrContact =""
@@ -66,5 +71,44 @@ export class ManegementComponent {
     }
     this.getAllCompaniesData()
   }
-    editCompany(userid:any){}
+    editCompany(userid:any){
+      this.adddata = false;
+      this.updatedata = true;
+      this.companyName = userid.companyName
+      this.companyHR = userid.companyHR
+      this.hrContact = userid.hrContact
+  this.userid = userid.id
+  this.example = userid.example
+    }
+
+    editUser() {
+      if (confirm('Are you sure you want to edit this user?')) {
+        this.firestore
+          .collection('companies')
+          .doc(this.userid)
+          .update({
+            companyName: this.companyName,
+            companyHR: this.companyHR,
+            hrContact: this.hrContact,
+            example:this.example
+          })
+          .then(() => {
+            this.toastr.success('User edited successfully', '');
+            this.companyName ="";
+    this.companyHR ="";
+    this.hrContact =""
+    this.example =""
+          })
+          .catch((error) => {
+            console.error('Error editing user:', error);
+          });
+      }
+      this.updatedata = false;
+      this.adddata = true;
+      
+      this.getAllCompaniesData();
+    }
+    Viewdetails(user:any){
+this.route.navigate(['./Layout/Interview/view', user.id])
+    }
 }

@@ -42,13 +42,13 @@ a {
 }
 
 .container{
-  background-color: beige;
-  margin: 40px;
-  border-radius: 20px;
+  background-color: rgb(220, 226, 228);
+  margin:30px;
+  border-radius: 10px;
 }
 
 .loginright {
-  background-color: cadetblue;
+  background-color: rgb(254, 254, 254);
 }
 
 .no-padding {

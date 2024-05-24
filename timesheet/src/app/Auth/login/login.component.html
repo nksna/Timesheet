@@ -13,7 +13,7 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-10 col-xl-7 mx-auto" *ngIf="logforforgetpass" >
-            <h3 class="display-4 mt-3">Login</h3>
+            <h3 class="display-4 mt-3 text-uppercase text-primary ">Login to Debugiz</h3>
 
             <form [formGroup]="loginform">
               <div class="form-group mb-3" id="fontmail">
@@ -51,14 +51,16 @@
                 >Remember password</label
                 >
               </div>
+              <div class=" text-center  " >
               <button
                 type="submit"
-                class="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm"
+                class="btn btn-success px-5 mb-3"
                 (click)="Loginform()" 
                 [disabled]="check"
               >
-                Login to Continue
+                Login 
               </button>
+            </div>
               <a (click)="forgetpass()" data-bs-toggle="modal" data-bs-target="#fullPageModal" class="btn btn-link mx-3 text-danger" style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; text-decoration: underline;" (click)="openQtyModel()">Forget Password</a>
               <div class="text-center d-flex justify-content-between mt-4"></div>
             </form>

@@ -26,7 +26,7 @@ export class HeaderComponent {
   // Method to handle logout
   
 
-  logoutmodal() {
+  logout() {
     this.fire.signOut().then(
       () => {
         localStorage.removeItem('token2');
@@ -39,11 +39,11 @@ export class HeaderComponent {
     );
   }
 
-  logout(){
-    const logoutModal = new bootstrap.Modal(document.getElementById('logoutModal'), {
-      backdrop: 'static', // Prevent closing by clicking outside the modal
-    });
-    logoutModal.show();
-  }
+  // logout(){
+  //   const logoutModal = new bootstrap.Modal(document.getElementById('logoutModal'), {
+  //     backdrop: 'static', // Prevent closing by clicking outside the modal
+  //   });
+  //   logoutModal.show();
+  // }
   
 }

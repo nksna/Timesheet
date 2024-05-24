@@ -1,0 +1,38 @@
+.container1 {
+    border: 1px solid black;
+    border-radius: 5%;
+    background-color: rgb(53, 54, 54);
+    padding: 20px; /* Add padding inside the containers */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    width: 300px;
+    height: 300px;
+    overflow: auto; /* Add scrollbars if content overflows */
+    margin: 10px auto; /* Center-align and add margin */
+}
+
+.preserve-space {
+    white-space: pre-wrap; /* Preserves spaces and line breaks */
+}
+
+.con1 {
+    background-color: black;
+    color: aliceblue;
+    padding: 20px; /* Padding for the outer container */
+    min-height: 100vh; /* Full viewport height */
+    box-sizing: border-box; /* Include padding in height calculation */
+}
+
+@media (min-width: 768px) {
+    .container1 {
+        width: 80%; /* Responsive width */
+        height: auto; /* Auto height based on content */
+    }
+}
+
+@media (min-width: 992px) {
+    .con1 {
+        padding: 50px; 
+    }
+    .container1 {
+        max-width: 600px;
+    }}   
