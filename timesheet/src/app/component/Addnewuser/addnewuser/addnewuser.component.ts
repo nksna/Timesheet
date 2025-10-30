@@ -23,14 +23,15 @@ export class AddnewuserComponent {
   address: string = '';
   job: string = '';
   education: string = '';
+  skills:string='';
 
 
   addNewUser() {
-    if (!this.email || !this.password || !this.Role) {
+    if (!this.email || !this.password || !this.Role || this.skills) {
       this.toastrService.showError('Please enter required fields', 'Incomplete Form');
       return;
     }
-
+ 
     // Additional logic for adding a new user
     // You can use the form values (this.email, this.password, etc.) to send a request or perform any action
     const payload= {
@@ -44,7 +45,8 @@ export class AddnewuserComponent {
       name: this.name,
       address: this.address,
       job: this.job,
-      education: this.education
+      education: this.education,
+      skills:this.skills
     }
     this.authservice.Register(payload)
     // Clear form fields after adding a new user
@@ -64,6 +66,8 @@ export class AddnewuserComponent {
     this.address = '';
     this.job = '';
     this.education = '';
+    this.skills='';
+
   }
 
  }
